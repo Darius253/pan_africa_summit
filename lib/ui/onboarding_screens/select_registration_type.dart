@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pan_african_ai_summit/ui/authentication_pages/designate_registration.dart';
 
 class SelectRegistrationType extends StatefulWidget {
   const SelectRegistrationType({super.key});
@@ -20,6 +21,8 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
     initialPage: 0,
     keepPage: true,
   );
+
+  List<Widget> pages = [DesignateRegisteration()];
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +59,10 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
                               color: theme.colorScheme.onPrimaryContainer,
                             ),
                           ),
-                          elevation: 2.0,
+                          elevation:
+                              currentIndex == registrationTypes.indexOf(type)
+                                  ? 2.0
+                                  : 0.0,
                           shadowColor: Colors.black87,
                         ),
                       ),
@@ -64,6 +70,9 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
                     .toList(),
           ),
         ),
+      ),
+      body: Stack(
+        children: [PageView(controller: pageController, children: pages)],
       ),
     );
   }
