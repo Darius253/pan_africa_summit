@@ -1,0 +1,106 @@
+import 'package:flutter/material.dart';
+import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/nav_button.dart';
+import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/onboarding_item.dart';
+import 'package:pan_african_ai_summit/ui/onboarding_screens/registration_page.dart';
+import 'package:shimmer/shimmer.dart';
+
+class OnBoardingScreen extends StatefulWidget {
+  const OnBoardingScreen({super.key});
+
+  @override
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+}
+
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  final List<Widget> onboardingItems = [
+    OnBoardingItem(
+      imagePath: "assets/images/onboarding_1.jpg",
+      text:
+          "Hear from renowned experts and visionaries as they share their insights on the transformative potential of AI in Africa.",
+    ),
+    OnBoardingItem(
+      imagePath: "assets/images/onboarding_2.jpg",
+      text:
+          "Engage in thought-provoking dialogues on the challenges, opportunities, and ethical considerations surrounding the deployment of AI technologies.",
+    ),
+    OnBoardingItem(
+      imagePath: "assets/images/onboarding_3.jpg",
+      text:
+          "Connect with a diverse community of AI enthusiasts, policymakers, entrepreneurs, and researchers, fostering valuable partnerships and collaborations.",
+    ),
+  ];
+
+  final PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+  int currentPage = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          PageView(
+            key: const Key("onboarding_page_view"),
+            scrollDirection: Axis.horizontal,
+            controller: pageController,
+            children: onboardingItems,
+            onPageChanged: (value) {
+              setState(() {
+                currentPage = value;
+              });
+            },
+          ),
+          currentPage == onboardingItems.length - 1
+              ? Align(
+                alignment: Alignment.centerRight,
+                child: NavigationButton(
+                  icon: Icons.arrow_forward,
+                  color:
+                      currentPage == onboardingItems.length - 1
+                          ? Color(0xffF561FA)
+                          : Colors.black,
+                  onTap: () {
+                    if (currentPage < onboardingItems.length - 1) {
+                      setState(() {
+                        currentPage = currentPage + 1;
+                      });
+                      pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeIn,
+                      );
+                    } else {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RegistrationPage(),
+                        ),
+                      );
+                      setState(() {
+                        currentPage = 0;
+                      });
+                    }
+                  },
+                ),
+              )
+              : SizedBox(),
+
+          Align(
+            alignment: Alignment.center,
+            child: Shimmer.fromColors(
+              baseColor: Color(0xff2987F2),
+              highlightColor: Color(0xffF561FA),
+              child: switch (currentPage) {
+                0 => Text(" Swipe >>"),
+                1 => Text("<< Swipe >>"),
+                2 => Text("<< Swipe"),
+
+                _ => Text("Swipe"),
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
