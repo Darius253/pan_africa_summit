@@ -13,16 +13,19 @@ class NavigationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 60,
-      height: 60,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: color ?? Colors.black,
-      ),
-      child: InkWell(
-        onTap: onTap,
-        child: Center(child: Icon(icon, color: Colors.white, size: 35)),
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Container(
+        width: 60,
+        height: 60,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: color ?? Colors.black,
+        ),
+        child: GestureDetector(
+          onTap: onTap,
+          child: Center(child: Icon(icon, color: Colors.white, size: 35)),
+        ),
       ),
     );
   }
