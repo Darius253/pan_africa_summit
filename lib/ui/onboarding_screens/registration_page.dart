@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/select_registration_type.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/gradient_text.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/nav_button.dart';
+import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/shimmer_text.dart';
 
 class RegistrationPage extends StatelessWidget {
   const RegistrationPage({super.key});
@@ -22,7 +23,7 @@ class RegistrationPage extends StatelessWidget {
               width: size.width,
               color: Color(0xFF06004C),
               child: Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -51,7 +52,7 @@ class RegistrationPage extends StatelessWidget {
             ),
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Image.asset(
                 "assets/images/ticket.png",
                 height: 50,
@@ -60,7 +61,7 @@ class RegistrationPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "Free Registration",
                 style: theme.textTheme.headlineMedium?.copyWith(
@@ -70,7 +71,7 @@ class RegistrationPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "To ensure a diverse and high-impact audience, all registrations will go through a short vetting process. Approved participants will receive a confirmation email with further details.",
                 style: theme.textTheme.bodyLarge?.copyWith(
@@ -79,23 +80,30 @@ class RegistrationPage extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
             ),
-            Align(
-              alignment: AlignmentDirectional.bottomEnd,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 10.0),
-                child: NavigationButton(
-                  icon: Icons.arrow_forward,
-                  color: theme.colorScheme.onSurface,
-                  onTap: () {
-                    // Navigate to the next screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SelectRegistrationType(),
-                      ),
-                    );
-                  },
-                ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {},
+                    child: ShimmerText(text: "Already registered?"),
+                  ),
+                  NavigationButton(
+                    icon: Icons.arrow_forward,
+                    color: theme.colorScheme.onSurface,
+                    onTap: () {
+                      // Navigate to the next screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SelectRegistrationType(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
           ],
