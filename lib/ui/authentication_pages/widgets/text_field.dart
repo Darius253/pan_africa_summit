@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/required_questions.dart';
 
 class TextFields extends StatelessWidget {
   const TextFields({
@@ -19,24 +20,7 @@ class TextFields extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       spacing: 10,
       children: [
-        RichText(
-          text: TextSpan(
-            text: labelText,
-            style: theme.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: theme.colorScheme.onSurface,
-            ),
-            children: [
-              TextSpan(
-                text: ' *',
-                style: theme.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red,
-                ),
-              ),
-            ],
-          ),
-        ),
+        RequiredQuestions(question: labelText, theme: theme),
 
         TextFormField(
           controller: controller,
