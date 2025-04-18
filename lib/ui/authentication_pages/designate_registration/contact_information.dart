@@ -2,12 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/text_field.dart';
 
 class ContactInformation extends StatelessWidget {
-  const ContactInformation({super.key, this.controller});
-  final TextEditingController? controller;
+  const ContactInformation({
+    super.key,
+    required this.nationalityController,
+    required this.mobileNumberController,
+    required this.countryOfResidenceController,
+    required this.emergencyContactController,
+    required this.emergencyContactPhoneController,
+    required this.scrollController,
+  });
+
+  final TextEditingController nationalityController;
+  final TextEditingController mobileNumberController;
+  final TextEditingController countryOfResidenceController;
+  final TextEditingController emergencyContactController;
+  final TextEditingController emergencyContactPhoneController;
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: scrollController,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -20,31 +35,32 @@ class ContactInformation extends StatelessWidget {
 
           TextFields(
             labelText: "Nationality",
-            controller: TextEditingController(),
+            controller: nationalityController,
             keyboardType: TextInputType.text,
           ),
 
           TextFields(
-            labelText: "Mobile Number",
-            controller: TextEditingController(),
+            labelText: "Mobile Number (Include Country Code)",
+            controller: mobileNumberController,
             keyboardType: TextInputType.phone,
           ),
 
           TextFields(
             labelText: "Country of Residence",
-            controller: controller ?? TextEditingController(),
+            controller: countryOfResidenceController,
             keyboardType: TextInputType.text,
           ),
           TextFields(
             labelText: "Emergency Contact Name",
-            controller: TextEditingController(),
+            controller: emergencyContactController,
             keyboardType: TextInputType.name,
           ),
           TextFields(
-            labelText: "Emergency Contact Phone Number",
-            controller: TextEditingController(),
+            labelText: "Emergency Contact Phone Number (Include Country Code)",
+            controller: emergencyContactPhoneController,
             keyboardType: TextInputType.phone,
           ),
+          SizedBox(height: 60),
         ],
       ),
     );
