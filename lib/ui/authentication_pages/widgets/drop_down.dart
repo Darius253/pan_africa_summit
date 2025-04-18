@@ -7,15 +7,16 @@ class CustomDropdown extends StatelessWidget {
     required this.items,
     this.onChanged,
     this.value,
+    required this.theme,
   });
   final String labelText;
   final List<String> items;
   final ValueChanged<String?>? onChanged;
   final String? value;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
