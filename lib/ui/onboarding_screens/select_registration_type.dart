@@ -15,14 +15,18 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
     "Volunteer",
   ];
 
-  String currentPage = "Delegate";
-  int currentIndex = 0;
-  final PageController pageController = PageController(
+  int _currentIndex = 0;
+  final PageController _pageController = PageController(
     initialPage: 0,
     keepPage: true,
   );
+  List<Widget> _pages = [];
 
-  List<Widget> pages = [DesignateRegisteration()];
+  @override
+  void initState() {
+    super.initState();
+    _pages = [DesignateRegisteration()];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +47,14 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
                       (type) => GestureDetector(
                         onTap: () {
                           setState(() {
-                            currentIndex = registrationTypes.indexOf(type);
-                            currentPage = type;
+                            _currentIndex = registrationTypes.indexOf(type);
+
                             // pageController.jumpToPage(currentIndex);
                           });
                         },
                         child: Chip(
                           backgroundColor:
-                              currentIndex == registrationTypes.indexOf(type)
+                              _currentIndex == registrationTypes.indexOf(type)
                                   ? theme.colorScheme.primaryContainer
                                   : Colors.transparent,
                           label: Text(
@@ -60,7 +64,7 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
                             ),
                           ),
                           elevation:
-                              currentIndex == registrationTypes.indexOf(type)
+                              _currentIndex == registrationTypes.indexOf(type)
                                   ? 2.0
                                   : 0.0,
                           shadowColor: Colors.black87,
@@ -72,7 +76,13 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
         ),
       ),
       body: Stack(
-        children: [PageView(controller: pageController, children: pages)],
+        children: [
+          PageView(
+            key: PageStorageKey("registration_page"),
+            controller: _pageController,
+            children: _pages,
+          ),
+        ],
       ),
     );
   }
