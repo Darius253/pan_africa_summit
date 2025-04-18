@@ -4,8 +4,20 @@ import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/gradient_tex
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/nav_button.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/shimmer_text.dart';
 
-class RegistrationPage extends StatelessWidget {
+class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
+
+  @override
+  State<RegistrationPage> createState() => _RegistrationPageState();
+}
+
+class _RegistrationPageState extends State<RegistrationPage> {
+  final _scrollController = ScrollController();
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +25,8 @@ class RegistrationPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
+        key: PageStorageKey("registration_page"),
+        controller: _scrollController,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,21 +95,24 @@ class RegistrationPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TextButton(
                     onPressed: () {},
-                    child: ShimmerText(text: "Already registered?"),
+                    child: ShimmerText(
+                      text: "Already registered?",
+                      theme: theme,
+                    ),
                   ),
                   NavigationButton(
                     icon: Icons.arrow_forward,
                     color: theme.colorScheme.onSurface,
                     onTap: () {
                       // Navigate to the next screen
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const SelectRegistrationType(),
