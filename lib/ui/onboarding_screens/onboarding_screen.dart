@@ -12,56 +12,63 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  final List<Widget> onboardingItems = [
-    OnBoardingItem(
-      imagePath: "assets/images/onboarding_1.jpg",
-      text:
-          "Hear from renowned experts and visionaries as they share their insights on the transformative potential of AI in Africa.",
-    ),
-    OnBoardingItem(
-      imagePath: "assets/images/onboarding_2.jpg",
-      text:
-          "Engage in thought-provoking dialogues on the challenges, opportunities, and ethical considerations surrounding the deployment of AI technologies.",
-    ),
-    OnBoardingItem(
-      imagePath: "assets/images/onboarding_3.jpg",
-      text:
-          "Connect with a diverse community of AI enthusiasts, policymakers, entrepreneurs, and researchers, fostering valuable partnerships and collaborations.",
-    ),
-  ];
+  List<Widget> _onboardingItems = [];
 
   final PageController pageController = PageController(
     initialPage: 0,
     keepPage: true,
   );
   int currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _onboardingItems = [
+      OnBoardingItem(
+        imagePath: "assets/images/onboarding_1.jpg",
+        text:
+            "Hear from renowned experts and visionaries as they share their insights on the transformative potential of AI in Africa.",
+      ),
+      OnBoardingItem(
+        imagePath: "assets/images/onboarding_2.jpg",
+        text:
+            "Engage in thought-provoking dialogues on the challenges, opportunities, and ethical considerations surrounding the deployment of AI technologies.",
+      ),
+      OnBoardingItem(
+        imagePath: "assets/images/onboarding_3.jpg",
+        text:
+            "Connect with a diverse community of AI enthusiasts, policymakers, entrepreneurs, and researchers, fostering valuable partnerships and collaborations.",
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
           PageView(
-            key: const Key("onboarding_page_view"),
+            key: const PageStorageKey("onboarding_page"),
             scrollDirection: Axis.horizontal,
             controller: pageController,
-            children: onboardingItems,
+            children: _onboardingItems,
             onPageChanged: (value) {
               setState(() {
                 currentPage = value;
               });
             },
           ),
-          currentPage == onboardingItems.length - 1
+          currentPage == _onboardingItems.length - 1
               ? Align(
                 alignment: Alignment.centerRight,
                 child: NavigationButton(
                   icon: Icons.arrow_forward,
                   color:
-                      currentPage == onboardingItems.length - 1
+                      currentPage == _onboardingItems.length - 1
                           ? Color(0xffF561FA)
                           : Colors.black,
                   onTap: () {
-                    if (currentPage < onboardingItems.length - 1) {
+                    if (currentPage < _onboardingItems.length - 1) {
                       setState(() {
                         currentPage = currentPage + 1;
                       });
