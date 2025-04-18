@@ -2,47 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/drop_down.dart';
 import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/text_field.dart';
 
-class PersonalInformation extends StatefulWidget {
-  const PersonalInformation({super.key});
+class PersonalInformation extends StatelessWidget {
+  const PersonalInformation({
+    super.key,
+    required this.firstNameController,
+    required this.lastNameController,
+    required this.emailController,
+    required this.organisationController,
+    required this.positionController,
+    required this.scrollController,
+    required this.onSectorChanged,
+    required this.onGenderChanged,
+    this.selectedSector,
+    this.selectedGender,
+  });
 
-  @override
-  State<PersonalInformation> createState() => _PersonalInformationState();
-}
+  final TextEditingController firstNameController;
+  final TextEditingController lastNameController;
+  final TextEditingController emailController;
+  final TextEditingController organisationController;
+  final TextEditingController positionController;
+  final ScrollController scrollController;
+  final Function(String?) onSectorChanged;
+  final Function(String?) onGenderChanged;
 
-class _PersonalInformationState extends State<PersonalInformation> {
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _organisationController = TextEditingController();
-  final TextEditingController _positionController = TextEditingController();
-  final ScrollController _scrollController = ScrollController();
+  final String? selectedSector;
+  final String? selectedGender;
 
-  @override
-  void dispose() {
-    // _firstNameController.dispose();
-    // _lastNameController.dispose();
-    // _emailController.dispose();
-    // _organisationController.dispose();
-    // _positionController.dispose();
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  List<String> sectors = [
-    "Government",
-    "Private Sector",
-    "Non-Governmental Organisation",
-    "International Organisation",
-  ];
-
-  List<String> genders = ["Male", "Female", "Other"];
-
-  String? selectedSector;
-  String? selectedGender;
   @override
   Widget build(BuildContext context) {
+    final List<String> sectors = [
+      "Government",
+      "Private Sector",
+      "Non-Governmental Organisation",
+      "International Organisation",
+    ];
+
+    final List<String> genders = ["Male", "Female", "Other"];
     return SingleChildScrollView(
-      controller: _scrollController,
+      controller: scrollController,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,13 +58,13 @@ class _PersonalInformationState extends State<PersonalInformation> {
               Expanded(
                 child: TextFields(
                   labelText: "First Name",
-                  controller: _firstNameController,
+                  controller: firstNameController,
                 ),
               ),
               Expanded(
                 child: TextFields(
                   labelText: "Last Name",
-                  controller: _lastNameController,
+                  controller: lastNameController,
                 ),
               ),
             ],
@@ -74,37 +72,32 @@ class _PersonalInformationState extends State<PersonalInformation> {
 
           TextFields(
             labelText: "Email",
-            controller: _emailController,
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
           ),
           TextFields(
             labelText: "Organisation/Institution",
-            controller: _organisationController,
+            controller: organisationController,
           ),
           TextFields(
             labelText: "Position/Delgation",
-            controller: _positionController,
+            controller: positionController,
           ),
           CustomDropdown(
             labelText: "Sector",
             items: sectors,
-            onChanged: (value) {
-              setState(() {
-                selectedSector = value;
-              });
-            },
+            onChanged: onSectorChanged,
             value: selectedSector,
+            theme: Theme.of(context),
           ),
           CustomDropdown(
             labelText: "Gender",
             items: genders,
-            onChanged: (value) {
-              setState(() {
-                selectedGender = value;
-              });
-            },
+            onChanged: onGenderChanged,
             value: selectedGender,
+            theme: Theme.of(context),
           ),
+          SizedBox(height: 60),
         ],
       ),
     );
