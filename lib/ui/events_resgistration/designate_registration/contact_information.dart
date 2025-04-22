@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/text_field.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/text_field.dart';
 
 class ContactInformation extends StatelessWidget {
   const ContactInformation({
@@ -42,7 +42,10 @@ class ContactInformation extends StatelessWidget {
           TextFields(
             labelText: "Mobile Number (Include Country Code)",
             controller: mobileNumberController,
-            keyboardType: TextInputType.phone,
+            keyboardType: const TextInputType.numberWithOptions(
+              signed: true,
+              decimal: false,
+            ),
           ),
 
           TextFields(
@@ -58,7 +61,10 @@ class ContactInformation extends StatelessWidget {
           TextFields(
             labelText: "Emergency Contact Phone Number (Include Country Code)",
             controller: emergencyContactPhoneController,
-            keyboardType: TextInputType.phone,
+            keyboardType: const TextInputType.numberWithOptions(
+              signed: true,
+              decimal: false,
+            ),
           ),
           SizedBox(height: 60),
         ],

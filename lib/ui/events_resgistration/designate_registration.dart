@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/designate_registration/contact_information.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/designate_registration/personal_information.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/designate_registration/travel_information.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/primary_button.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/snack_bar.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/designate_registration/contact_information.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/designate_registration/personal_information.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/designate_registration/travel_information.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/nav_button.dart';
 
 class DesignateRegisteration extends StatefulWidget {
@@ -14,30 +14,14 @@ class DesignateRegisteration extends StatefulWidget {
 }
 
 class _DesignateRegisterationState extends State<DesignateRegisteration> {
-  final PageController _pageController = PageController(
+  final PageController _dpageController = PageController(
     initialPage: 0,
     keepPage: true,
   );
-  int currentIndex = 0;
-
-  @override
-  void dispose() {
-    super.dispose();
-    _pageController.dispose();
-    _firstNameController.dispose();
-    _lastNameController.dispose();
-    _emailController.dispose();
-    _organisationController.dispose();
-    _positionController.dispose();
-    _pscrollController.dispose();
-    _emergencyContactController.dispose();
-    _emergencyContactPhoneController.dispose();
-    _nationalityController.dispose();
-    _countryOfResidenceController.dispose();
-    _mobileNumberController.dispose();
-    _cscrollController.dispose();
-    _travelInformationScrollController.dispose();
-  }
+  int _currentIndex = 0;
+  List<Widget> _dpages = [];
+  String? _selectedSector;
+  String? _selectedGender;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -48,9 +32,6 @@ class _DesignateRegisterationState extends State<DesignateRegisteration> {
   final _organisationController = TextEditingController();
   final _positionController = TextEditingController();
   final _pscrollController = ScrollController();
-
-  String? _selectedSector;
-  String? _selectedGender;
 
   // Contact Information Controllers
   final _emergencyContactController = TextEditingController();
@@ -64,8 +45,9 @@ class _DesignateRegisterationState extends State<DesignateRegisteration> {
   final _travelInformationScrollController = ScrollController();
 
   @override
-  Widget build(BuildContext context) {
-    List<Widget> pages = [
+  void initState() {
+    super.initState();
+    _dpages = [
       PersonalInformation(
         emailController: _emailController,
         firstNameController: _firstNameController,
@@ -96,6 +78,29 @@ class _DesignateRegisterationState extends State<DesignateRegisteration> {
       ),
       TravelInformation(scrollController: _travelInformationScrollController),
     ];
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _dpageController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _organisationController.dispose();
+    _positionController.dispose();
+    _pscrollController.dispose();
+    _emergencyContactController.dispose();
+    _emergencyContactPhoneController.dispose();
+    _nationalityController.dispose();
+    _countryOfResidenceController.dispose();
+    _mobileNumberController.dispose();
+    _cscrollController.dispose();
+    _travelInformationScrollController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Padding(
@@ -106,47 +111,48 @@ class _DesignateRegisterationState extends State<DesignateRegisteration> {
             children: [
               PageView(
                 key: Key("DesignateRegistrationPageView"),
+
                 onPageChanged:
                     (value) => setState(() {
-                      currentIndex = value;
+                      _currentIndex = value;
                     }),
-                controller: _pageController,
+                controller: _dpageController,
                 physics: const NeverScrollableScrollPhysics(),
-                children: pages,
+                children: _dpages,
               ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    if (currentIndex != 0)
+                    if (_currentIndex != 0)
                       NavigationButton(
                         icon: Icons.arrow_back,
                         onTap: () {
-                          _pageController.previousPage(
+                          _dpageController.previousPage(
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.easeIn,
                           );
                           setState(() {
-                            currentIndex = 0;
+                            _currentIndex = 0;
                           });
                         },
                       )
                     else
                       const SizedBox(),
 
-                    if (currentIndex != pages.length - 1)
+                    if (_currentIndex != _dpages.length - 1)
                       NavigationButton(
                         icon: Icons.arrow_forward,
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            _pageController.nextPage(
+                            _dpageController.nextPage(
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.easeIn,
                             );
                             setState(() {
-                              currentIndex = 1;
+                              _currentIndex = 1;
                             });
                           } else {
                             CustomSnackBar.show(

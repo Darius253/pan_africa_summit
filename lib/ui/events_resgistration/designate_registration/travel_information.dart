@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/travel_info_with_checkbox.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/travel_info_with_radio_buttons.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/travel_info_with_checkbox.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/travel_info_with_radio_buttons.dart';
 
 class TravelInformation extends StatelessWidget {
   const TravelInformation({super.key, required this.scrollController});

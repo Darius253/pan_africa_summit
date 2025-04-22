@@ -10,21 +10,25 @@ class CustomCheckbox extends StatelessWidget {
   });
   final String option;
   final void Function(bool?)? onChanged;
-  final   Set<String> selectedOptions;
+  final Set<String> selectedOptions;
   final bool value;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: Checkbox.adaptive(
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        visualDensity: const VisualDensity(
-          horizontal: VisualDensity.minimumDensity,
-          vertical: VisualDensity.minimumDensity,
+      leading: Transform.scale(
+        scale: 1.3,
+        child: Checkbox.adaptive(
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          visualDensity: const VisualDensity(
+            horizontal: VisualDensity.minimumDensity,
+            vertical: VisualDensity.minimumDensity,
+          ),
+          value: value,
+          splashRadius: 10,
+          onChanged: onChanged,
         ),
-        value: value,
-        onChanged: onChanged,
       ),
       title: Text(
         option,

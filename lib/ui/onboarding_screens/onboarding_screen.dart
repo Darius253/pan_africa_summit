@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pan_african_ai_summit/ui/onboarding_screens/authentication_page.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/nav_button.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/onboarding_item.dart';
-import 'package:pan_african_ai_summit/ui/onboarding_screens/registration_page.dart';
 import 'package:shimmer/shimmer.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -80,7 +80,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const RegistrationPage(),
+                          builder: (context) => const AuthenticationPage(),
                         ),
                       );
                       setState(() {

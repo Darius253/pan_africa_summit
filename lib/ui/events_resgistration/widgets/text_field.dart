@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/required_questions.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/required_questions.dart';
 
 class TextFields extends StatelessWidget {
   const TextFields({
@@ -24,6 +24,8 @@ class TextFields extends StatelessWidget {
 
         TextFormField(
           controller: controller,
+
+          maxLines: 1,
           keyboardType: keyboardType ?? TextInputType.text,
           textInputAction: TextInputAction.done,
           style: theme.textTheme.titleMedium?.copyWith(

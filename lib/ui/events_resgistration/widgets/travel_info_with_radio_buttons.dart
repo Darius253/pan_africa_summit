@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/custom_radio_button.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/required_questions.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/custom_radio_button.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/required_questions.dart';
 
 class TravelInfoWithRadioButtons extends StatefulWidget {
   const TravelInfoWithRadioButtons({super.key, required this.question});

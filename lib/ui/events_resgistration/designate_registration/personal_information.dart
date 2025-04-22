@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/drop_down.dart';
-import 'package:pan_african_ai_summit/ui/authentication_pages/widgets/text_field.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/drop_down.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/text_field.dart';
 
 class PersonalInformation extends StatelessWidget {
   const PersonalInformation({
