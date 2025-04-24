@@ -8,37 +8,33 @@ class TravelInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        spacing: 10,
-        children: [
-          Text(
-            "Travel & Special Requirements",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          TravelInfoWithRadioButtons(
-            question: "Do you require a Visa on Arrival?",
-          ),
-          TravelInfoWithRadioButtons(
-            question: "Do you need assistance with your Visa Application?",
-          ),
-          TravelInfoWithRadioButtons(
-            question: "Do you have any Dietary Requirements?",
-          ),
+    return ListView(
+      controller: scrollController,
+      children: [
+        Text(
+          "Travel & Special Requirements",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        TravelInfoWithRadioButtons(
+          question: "Do you require a Visa on Arrival?",
+        ),
+        TravelInfoWithRadioButtons(
+          question: "Do you need assistance with your Visa Application?",
+        ),
+        TravelInfoWithRadioButtons(
+          question: "Do you have any Dietary Requirements?",
+        ),
 
-          TravelInfoWithCheckbox(
-            question: "Accessibility Requirements",
-            options: [
-              "Wheelchair Access",
-              "Sign Language Interpretation",
-              "None",
-            ],
-          ),
-          SizedBox(height: 60),
-        ],
-      ),
+        TravelInfoWithCheckbox(
+          question: "Accessibility Requirements",
+          options: [
+            "Wheelchair Access",
+            "Sign Language Interpretation",
+            "None",
+          ],
+        ),
+        SizedBox(height: 60),
+      ],
     );
   }
 }

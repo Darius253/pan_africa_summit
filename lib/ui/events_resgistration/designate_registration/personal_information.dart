@@ -39,67 +39,62 @@ class PersonalInformation extends StatelessWidget {
     ];
 
     final List<String> genders = ["Male", "Female", "Other"];
-    return SingleChildScrollView(
+    return ListView(
       controller: scrollController,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 10,
-        children: [
-          Text(
-            "Personal Information",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 10,
-            children: [
-              Expanded(
-                child: TextFields(
-                  labelText: "First Name",
-                  controller: firstNameController,
-                ),
+      children: [
+        Text(
+          "Personal Information",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 10,
+          children: [
+            Expanded(
+              child: TextFields(
+                labelText: "First Name",
+                controller: firstNameController,
               ),
-              Expanded(
-                child: TextFields(
-                  labelText: "Last Name",
-                  controller: lastNameController,
-                ),
+            ),
+            Expanded(
+              child: TextFields(
+                labelText: "Last Name",
+                controller: lastNameController,
               ),
-            ],
-          ),
+            ),
+          ],
+        ),
 
-          TextFields(
-            labelText: "Email",
-            controller: emailController,
-            keyboardType: TextInputType.emailAddress,
-          ),
-          TextFields(
-            labelText: "Organisation/Institution",
-            controller: organisationController,
-          ),
-          TextFields(
-            labelText: "Position/Delgation",
-            controller: positionController,
-          ),
-          CustomDropdown(
-            labelText: "Sector",
-            items: sectors,
-            onChanged: onSectorChanged,
-            value: selectedSector,
-            theme: Theme.of(context),
-          ),
-          CustomDropdown(
-            labelText: "Gender",
-            items: genders,
-            onChanged: onGenderChanged,
-            value: selectedGender,
-            theme: Theme.of(context),
-          ),
-          SizedBox(height: 60),
-        ],
-      ),
+        TextFields(
+          labelText: "Email",
+          controller: emailController,
+          keyboardType: TextInputType.emailAddress,
+        ),
+        TextFields(
+          labelText: "Organisation/Institution",
+          controller: organisationController,
+        ),
+        TextFields(
+          labelText: "Position/Delgation",
+          controller: positionController,
+        ),
+        CustomDropdown(
+          labelText: "Sector",
+          items: sectors,
+          onChanged: onSectorChanged,
+          value: selectedSector,
+          theme: Theme.of(context),
+        ),
+        CustomDropdown(
+          labelText: "Gender",
+          items: genders,
+          onChanged: onGenderChanged,
+          value: selectedGender,
+          theme: Theme.of(context),
+        ),
+        SizedBox(height: 60),
+      ],
     );
   }
 }

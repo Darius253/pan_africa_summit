@@ -46,97 +46,92 @@ class VolunteerRegistrationPage extends StatelessWidget {
       key: formKey,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
+        child: ListView(
           controller: scrollController,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 10,
-            children: [
-              Text(
-                "Volunteer Pass Registration",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 10,
-                children: [
-                  Expanded(
-                    child: TextFields(
-                      labelText: "First Name",
-                      controller: firstNameController,
-                    ),
+          children: [
+            Text(
+              "Volunteer Pass Registration",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 10,
+              children: [
+                Expanded(
+                  child: TextFields(
+                    labelText: "First Name",
+                    controller: firstNameController,
                   ),
-                  Expanded(
-                    child: TextFields(
-                      labelText: "Last Name",
-                      controller: lastNameController,
-                    ),
+                ),
+                Expanded(
+                  child: TextFields(
+                    labelText: "Last Name",
+                    controller: lastNameController,
                   ),
-                ],
-              ),
-
-              TextFields(
-                labelText: "Email",
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-              ),
-              TextFields(
-                labelText: "Mobile Number (Include Country Code)",
-                controller: mobileNumberController,
-                keyboardType: const TextInputType.numberWithOptions(
-                  signed: true,
-                  decimal: false,
                 ),
-              ),
+              ],
+            ),
 
-              CustomDropdown(
-                labelText: "Areas of Interest",
-                items: areasOfInterest,
-                onChanged: onAreasOfInterestChanged,
-                value: selectedAreasOfInterest,
-                theme: Theme.of(context),
+            TextFields(
+              labelText: "Email",
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
+            ),
+            TextFields(
+              labelText: "Mobile Number (Include Country Code)",
+              controller: mobileNumberController,
+              keyboardType: const TextInputType.numberWithOptions(
+                signed: true,
+                decimal: false,
               ),
-              TravelInfoWithRadioButtons(
-                question:
-                    "Are you available for the full duration of the summit?",
-              ),
-              TravelInfoWithRadioButtons(
-                question: "Are you available for pre-event preparations?",
-              ),
-              TravelInfoWithRadioButtons(
-                question:
-                    "Do you have any prior experience volunteering at events?",
-              ),
+            ),
 
-              Align(
-                alignment: Alignment.bottomRight,
-                child: PrimaryButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      // showLoadingDialog(context);
-                      // Handle form submission
+            CustomDropdown(
+              labelText: "Areas of Interest",
+              items: areasOfInterest,
+              onChanged: onAreasOfInterestChanged,
+              value: selectedAreasOfInterest,
+              theme: Theme.of(context),
+            ),
+            TravelInfoWithRadioButtons(
+              question:
+                  "Are you available for the full duration of the summit?",
+            ),
+            TravelInfoWithRadioButtons(
+              question: "Are you available for pre-event preparations?",
+            ),
+            TravelInfoWithRadioButtons(
+              question:
+                  "Do you have any prior experience volunteering at events?",
+            ),
 
-                      CustomSnackBar.show(
-                        context,
-                        "Registration Completed Successfully",
-                        isError: false,
-                      );
-                    } else {
-                      CustomSnackBar.show(
-                        context,
-                        "Please fill in all fields correctly.",
-                        isError: true,
-                      );
-                    }
-                  },
-                  text: "Complete Registration",
-                ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: PrimaryButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    // showLoadingDialog(context);
+                    // Handle form submission
+
+                    CustomSnackBar.show(
+                      context,
+                      "Registration Completed Successfully",
+                      isError: false,
+                    );
+                  } else {
+                    CustomSnackBar.show(
+                      context,
+                      "Please fill in all fields correctly.",
+                      isError: true,
+                    );
+                  }
+                },
+                text: "Complete Registration",
               ),
-              SizedBox(height: 60),
-            ],
-          ),
+            ),
+            SizedBox(height: 60),
+          ],
         ),
       ),
     );

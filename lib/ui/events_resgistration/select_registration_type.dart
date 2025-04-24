@@ -105,44 +105,40 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         automaticallyImplyLeading: false,
-        title: SingleChildScrollView(
+        title: ListView(
           scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            spacing: 10.0,
-            children:
-                registrationTypes
-                    .map(
-                      (type) => GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _currentIndex = registrationTypes.indexOf(type);
-                            _pageController.jumpToPage(
-                              registrationTypes.indexOf(type),
-                            );
-                          });
-                        },
-                        child: Chip(
-                          backgroundColor:
-                              _currentIndex == registrationTypes.indexOf(type)
-                                  ? theme.colorScheme.primaryContainer
-                                  : Colors.transparent,
-                          label: Text(
-                            type,
-                            style: theme.textTheme.bodyLarge?.copyWith(
-                              color: theme.colorScheme.onPrimaryContainer,
-                            ),
+          children:
+              registrationTypes
+                  .map(
+                    (type) => GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _currentIndex = registrationTypes.indexOf(type);
+                          _pageController.jumpToPage(
+                            registrationTypes.indexOf(type),
+                          );
+                        });
+                      },
+                      child: Chip(
+                        backgroundColor:
+                            _currentIndex == registrationTypes.indexOf(type)
+                                ? theme.colorScheme.primaryContainer
+                                : Colors.transparent,
+                        label: Text(
+                          type,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: theme.colorScheme.onPrimaryContainer,
                           ),
-                          elevation:
-                              _currentIndex == registrationTypes.indexOf(type)
-                                  ? 2.0
-                                  : 0.0,
-                          shadowColor: Colors.black87,
                         ),
+                        elevation:
+                            _currentIndex == registrationTypes.indexOf(type)
+                                ? 2.0
+                                : 0.0,
+                        shadowColor: Colors.black87,
                       ),
-                    )
-                    .toList(),
-          ),
+                    ),
+                  )
+                  .toList(),
         ),
       ),
       body: Stack(

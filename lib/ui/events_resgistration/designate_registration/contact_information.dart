@@ -21,54 +21,49 @@ class ContactInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return ListView(
       controller: scrollController,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 10,
-        children: [
-          Text(
-            "Contact Information",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
+      children: [
+        Text(
+          "Contact Information",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
 
-          TextFields(
-            labelText: "Nationality",
-            controller: nationalityController,
-            keyboardType: TextInputType.text,
-          ),
+        TextFields(
+          labelText: "Nationality",
+          controller: nationalityController,
+          keyboardType: TextInputType.text,
+        ),
 
-          TextFields(
-            labelText: "Mobile Number (Include Country Code)",
-            controller: mobileNumberController,
-            keyboardType: const TextInputType.numberWithOptions(
-              signed: true,
-              decimal: false,
-            ),
+        TextFields(
+          labelText: "Mobile Number (Include Country Code)",
+          controller: mobileNumberController,
+          keyboardType: const TextInputType.numberWithOptions(
+            signed: true,
+            decimal: false,
           ),
+        ),
 
-          TextFields(
-            labelText: "Country of Residence",
-            controller: countryOfResidenceController,
-            keyboardType: TextInputType.text,
+        TextFields(
+          labelText: "Country of Residence",
+          controller: countryOfResidenceController,
+          keyboardType: TextInputType.text,
+        ),
+        TextFields(
+          labelText: "Emergency Contact Name",
+          controller: emergencyContactController,
+          keyboardType: TextInputType.name,
+        ),
+        TextFields(
+          labelText: "Emergency Contact Phone Number (Include Country Code)",
+          controller: emergencyContactPhoneController,
+          keyboardType: const TextInputType.numberWithOptions(
+            signed: true,
+            decimal: false,
           ),
-          TextFields(
-            labelText: "Emergency Contact Name",
-            controller: emergencyContactController,
-            keyboardType: TextInputType.name,
-          ),
-          TextFields(
-            labelText: "Emergency Contact Phone Number (Include Country Code)",
-            controller: emergencyContactPhoneController,
-            keyboardType: const TextInputType.numberWithOptions(
-              signed: true,
-              decimal: false,
-            ),
-          ),
-          SizedBox(height: 60),
-        ],
-      ),
+        ),
+        SizedBox(height: 60),
+      ],
     );
   }
 }
