@@ -120,6 +120,7 @@ class MediaRegistrationPage extends StatelessWidget {
               value: selectedCoverageType,
               theme: Theme.of(context),
             ),
+            SizedBox(height: 20),
 
             Align(
               alignment: Alignment.bottomRight,

@@ -105,7 +105,7 @@ class VolunteerRegistrationPage extends StatelessWidget {
               question:
                   "Do you have any prior experience volunteering at events?",
             ),
-
+            SizedBox(height: 20),
             Align(
               alignment: Alignment.bottomRight,
               child: PrimaryButton(

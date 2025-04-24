@@ -20,8 +20,8 @@ class _CountdownContainerState extends State<CountdownContainer> {
           end: Alignment.bottomCenter,
         ),
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15),
         ),
       ),
 

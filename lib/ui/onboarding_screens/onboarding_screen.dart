@@ -24,17 +24,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   void initState() {
     super.initState();
     _onboardingItems = [
-      OnBoardingItem(
+      const OnBoardingItem(
         imagePath: "assets/images/onboarding_1.jpg",
         text:
             "Hear from renowned experts and visionaries as they share their insights on the transformative potential of AI in Africa.",
       ),
-      OnBoardingItem(
+      const OnBoardingItem(
         imagePath: "assets/images/onboarding_2.jpg",
         text:
             "Engage in thought-provoking dialogues on the challenges, opportunities, and ethical considerations surrounding the deployment of AI technologies.",
       ),
-      OnBoardingItem(
+      const OnBoardingItem(
         imagePath: "assets/images/onboarding_3.jpg",
         text:
             "Connect with a diverse community of AI enthusiasts, policymakers, entrepreneurs, and researchers, fostering valuable partnerships and collaborations.",
