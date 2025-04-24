@@ -69,7 +69,10 @@ flutter:
     - assets/images/verify.png
     - assets/images/lock.jpg
     - assets/images/google.png
+    - assets/images/logo.png
+    - assets/images/background.webp
     - assets/lottie/background.json
+   
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

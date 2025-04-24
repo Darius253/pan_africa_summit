@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
+import 'package:pan_african_ai_summit/ui/home_screens/home_page.dart';
 import 'package:pan_african_ai_summit/ui/utils/loading.dart';
 
 class AuthenticationPage extends StatefulWidget {
@@ -40,12 +41,10 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                       setState(() {
                         _isLoading = true;
                       });
-                      // Simulate a network call
-                      Future.delayed(const Duration(seconds: 2), () {
-                        setState(() {
-                          _isLoading = false;
-                        });
-                      });
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
                     },
                     text: "Sign In with Google",
                     color: Colors.transparent,
@@ -60,12 +59,10 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                       setState(() {
                         _isLoading = true;
                       });
-                      // Simulate a network call
-                      Future.delayed(const Duration(seconds: 2), () {
-                        setState(() {
-                          _isLoading = false;
-                        });
-                      });
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
                     },
                     text: "Sign In with Apple",
                     icon: Icon(Icons.apple, size: 25, color: Colors.white),

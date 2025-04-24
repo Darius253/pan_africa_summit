@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/select_registration_type.dart';
-import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/gradient_text.dart';
+import 'package:pan_african_ai_summit/ui/utils/gradient_text.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/nav_button.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/shimmer_text.dart';
 
