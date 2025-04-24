@@ -30,10 +30,10 @@ class _CountdownContainerState extends State<CountdownContainer> {
         crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 20,
         children: [
-          _countDownText(Theme.of(context), "10", "Days"),
-          _countDownText(Theme.of(context), "10", "Hours"),
+          _countDownText(Theme.of(context), "152", "Days"),
+          _countDownText(Theme.of(context), "17", "Hours"),
           _countDownText(Theme.of(context), "10", "Minutes"),
-          _countDownText(Theme.of(context), "10", "Seconds"),
+          _countDownText(Theme.of(context), "5", "Seconds"),
         ],
       ),
     );

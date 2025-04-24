@@ -22,19 +22,11 @@ class HomePage extends StatelessWidget {
         spacing: 20,
         children: [
           EventsCover(
-            headline: "1st Pan African AI Summit 2025 (PAAiS)",
+            headline: "1st Pan African AI Summit 2025 (PAAIS)",
             subHeadline:
                 "Harnessing ai to enhance productivity and skills to drive growth across Africa",
             date: "October 20-22, 2023",
             location: "Accra, Ghana",
-          ),
-
-          Text(
-            "Event Countdown",
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
           ),
 
           CountdownContainer(),
