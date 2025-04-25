@@ -12,12 +12,21 @@ class GradientText extends StatelessWidget {
   final Gradient gradient;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ShaderMask(
       blendMode: BlendMode.srcIn,
-      shaderCallback: (bounds) => gradient.createShader(
-        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+      shaderCallback:
+          (bounds) => gradient.createShader(
+            Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+          ),
+      child: Text(
+        text,
+        style:
+            style ??
+            theme.textTheme.headlineLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
       ),
-      child: Text(text, style: style),
     );
   }
 }

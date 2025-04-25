@@ -87,39 +87,32 @@ class _RegistrationPageState extends State<RegistrationPage> {
             key: PageStorageKey("registration_page"),
             children: <Widget>[
               AnimatedContainer(
+                clipBehavior: Clip.hardEdge,
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeIn,
-                height: isVisible ? 400 : 0,
+                height: isVisible ? 350 : 0,
                 width: 400,
                 color: Color(0xFF06004C),
                 child: Padding(
                   padding: EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: ListView(
+                    physics: const NeverScrollableScrollPhysics(),
                     children: <Widget>[
-                      Flexible(
-                        child: GradientText(
-                          text:
-                              "REGISTER WITH US FOR THE PAN AFRICAN AI SUMMIT",
-                          gradient: LinearGradient(
-                            colors: [Color(0xff2987F2), Color(0xffF561FA)],
-                          ),
-                          style: theme.textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                      const GradientText(
+                        text: "REGISTER WITH US FOR THE PAN AFRICAN AI SUMMIT",
+                        gradient: LinearGradient(
+                          colors: [Color(0xff2987F2), Color(0xffF561FA)],
                         ),
                       ),
                       const SizedBox(height: 25),
-                      Flexible(
-                        child: Text(
-                          """Whether you’re attending as a delegate, media representative, or volunteer,this summit offers an unparalleled opportunity to be part of Africa’s AI revolution.
+                      Text(
+                        """Whether you’re attending as a delegate, media representative, or volunteer,this summit offers an unparalleled opportunity to be part of Africa’s AI revolution.
                         """,
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.left,
-                          maxLines: 7,
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: Colors.white,
                         ),
+                        textAlign: TextAlign.left,
+                        maxLines: 7,
                       ),
                     ],
                   ),

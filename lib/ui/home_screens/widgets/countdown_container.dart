@@ -10,31 +10,34 @@ class CountdownContainer extends StatefulWidget {
 class _CountdownContainerState extends State<CountdownContainer> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 150,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xffF561FA), Color.fromRGBO(0, 14, 92, 0.5)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+    return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
+      child: Container(
+        width: double.infinity,
+        height: 150,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xffF561FA), Color.fromRGBO(0, 14, 92, 0.5)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+          ),
         ),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(15),
-          topRight: Radius.circular(15),
-        ),
-      ),
 
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        spacing: 20,
-        children: [
-          _countDownText(Theme.of(context), "152", "Days"),
-          _countDownText(Theme.of(context), "17", "Hours"),
-          _countDownText(Theme.of(context), "10", "Minutes"),
-          _countDownText(Theme.of(context), "5", "Seconds"),
-        ],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: 20,
+          children: [
+            _countDownText(Theme.of(context), "152", "Days"),
+            _countDownText(Theme.of(context), "17", "Hours"),
+            _countDownText(Theme.of(context), "10", "Minutes"),
+            _countDownText(Theme.of(context), "5", "Seconds"),
+          ],
+        ),
       ),
     );
   }
@@ -46,20 +49,16 @@ Widget _countDownText(ThemeData theme, String text, String text2) {
     crossAxisAlignment: CrossAxisAlignment.center,
     spacing: 10,
     children: [
-      Flexible(
-        child: Text(
-          text,
-          style: theme.textTheme.displaySmall!.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+      Text(
+        text,
+        style: theme.textTheme.displaySmall!.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         ),
       ),
-      Flexible(
-        child: Text(
-          text2,
-          style: theme.textTheme.bodyLarge?.copyWith(color: Colors.white),
-        ),
+      Text(
+        text2,
+        style: theme.textTheme.bodyLarge?.copyWith(color: Colors.white),
       ),
     ],
   );

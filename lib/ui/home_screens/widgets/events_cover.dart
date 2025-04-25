@@ -41,7 +41,6 @@ class EventsCover extends StatelessWidget {
               GradientText(
                 text: headline,
                 style: theme.textTheme.headlineLarge?.copyWith(
-                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
                 gradient: LinearGradient(

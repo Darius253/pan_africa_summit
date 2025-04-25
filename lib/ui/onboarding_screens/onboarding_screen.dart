@@ -43,6 +43,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    pageController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(

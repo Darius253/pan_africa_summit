@@ -3,10 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/registration_page.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
-import 'package:pan_african_ai_summit/ui/home_screens/widgets/countdown_container.dart';
-import 'package:pan_african_ai_summit/ui/home_screens/widgets/events_cover.dart';
-import 'package:pan_african_ai_summit/ui/home_screens/widgets/why_paais_info.dart';
-import 'package:pan_african_ai_summit/ui/utils/gradient_text.dart';
+import 'package:pan_african_ai_summit/ui/home_screens/main_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,51 +13,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Widget> items = [];
-  final controller = ScrollController();
-  bool isVisible = false;
+  final _pageController = PageController();
+  int _currentPage = 0;
+  List<Widget> _pages = [];
 
   @override
   void dispose() {
     super.dispose();
-    controller.dispose();
+    _pageController.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 500), () {
-      setState(() {
-        isVisible = true;
-      });
-    });
 
-    items = [
-      const WhyPaaisInfo(
-        headline: "Driving African Innovation",
-        infoText:
-            "The Pan African AI Summit is uniquely positioned to catalyze the development and deployment of AI AI-powered solutions that address Africa’s most pressing challenges. By bringing together the brightest minds from across the continent and the globe, we aim to foster an ecosystem of innovation and collaboration that empowers Africans to lead the way in shaping the future of AI.",
-        imagePath: "drive.webp",
-      ),
-      const WhyPaaisInfo(
-        headline: "Promoting Inclusive Growth",
-        infoText:
-            "We recognize that the benefits of AI must be equitably distributed to ensure that no one is left behind. The Pan African AI Summit is committed to championing policies, initiatives, and partnerships that prioritize the needs of marginalized communities and promote the inclusive development of AI technologies."
-            "",
-        imagePath: "growth.webp",
-      ),
-      const WhyPaaisInfo(
-        headline: "Bridging the Digital Divide",
-        infoText:
-            "Africa’s digital transformation is crucial for unlocking the continent’s vast potential. The Pan African AI Summit serves as a platform to bridge the digital divide, fostering collaboration and knowledge exchange that empower African nations to harness the power of emerging technologies, including AI, to drive sustainable development and improve the lives of their citizens."
-            "",
-        imagePath: "digital.webp",
-      ),
-    ];
+    _pages = [const MainPage()];
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: Color.fromRGBO(0, 14, 92, 0.5),
       extendBody: true,
@@ -86,61 +58,68 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        controller: controller,
-        children: [
-          const EventsCover(
-            headline: "1st Pan African AI Summit 2025 (PAAIS)",
-            subHeadline:
-                "Harnessing AI to enhance productivity and skills to drive growth across Africa",
-            date: "October 20-22, 2023",
-            location: "Accra, Ghana",
-          ),
-
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeIn,
-            height: isVisible ? 150 : 0,
-            child: const CountdownContainer(),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: GradientText(
-              text: "WHY PAAIS?",
-              style: Theme.of(
-                context,
-              ).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold),
-              gradient: LinearGradient(
-                colors: [Color(0xffF561FA), Color.fromARGB(255, 203, 6, 52)],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 600,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              separatorBuilder: (context, index) => const SizedBox(width: 20),
-              itemCount: 3,
-              itemBuilder: (context, index) => items[index],
-            ),
-          ),
-          const SizedBox(height: 20),
-        ],
+      body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        key: const PageStorageKey("home_page"),
+        scrollDirection: Axis.horizontal,
+        controller: _pageController,
+        onPageChanged: (value) {
+          setState(() {
+            _currentPage = value;
+          });
+        },
+        children: _pages,
       ),
-
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 50.0, left: 50, right: 50),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: Color(0xffF561FA).withOpacity(0.2),
-                borderRadius: BorderRadius.circular(20),
+            child: SingleChildScrollView(
+              child: Container(
+                height: 50,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 72, 27, 74).withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: BottomNavigationBar(
+                    currentIndex: _currentPage,
+                    onTap: (value) {
+                      setState(() {
+                        _currentPage = value;
+                      });
+                      _pageController.jumpToPage(value);
+                    },
+                    backgroundColor: Colors.transparent,
+                    unselectedItemColor: Colors.white,
+                    selectedItemColor: theme.colorScheme.primaryContainer,
+
+                    items: [
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.dashboard),
+                        label: "",
+                        backgroundColor: Color.fromARGB(
+                          255,
+                          12,
+                          12,
+                          12,
+                        ).withValues(alpha: 0.2),
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.calendar_month_rounded),
+                        label: "",
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.settings),
+                        label: "",
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
