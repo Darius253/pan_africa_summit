@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/registration_page.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
@@ -61,6 +63,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(0, 14, 92, 0.5),
+      extendBody: true,
       appBar: AppBar(
         actionsPadding: EdgeInsets.only(right: (10)),
         title: Image.asset(
@@ -123,7 +126,25 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) => items[index],
             ),
           ),
+          const SizedBox(height: 20),
         ],
+      ),
+
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 50.0, left: 50, right: 50),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              height: 50,
+              decoration: BoxDecoration(
+                color: Color(0xffF561FA).withOpacity(0.2),
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
