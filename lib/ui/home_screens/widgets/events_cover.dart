@@ -23,12 +23,12 @@ class EventsCover extends StatelessWidget {
         Image.asset(
           "assets/images/background.webp",
           width: size.width,
-          height: size.height * 0.3,
+          height: 300,
           fit: BoxFit.cover,
         ),
         Container(
           width: size.width,
-          height: size.height * 0.3,
+          height: 300,
           color: Color.fromRGBO(0, 14, 92, 0.5),
         ),
         Padding(

@@ -6,13 +6,34 @@ import 'package:pan_african_ai_summit/ui/home_screens/widgets/events_cover.dart'
 import 'package:pan_african_ai_summit/ui/home_screens/widgets/why_paais_info.dart';
 import 'package:pan_african_ai_summit/ui/utils/gradient_text.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final controller = ScrollController();
-    final List<Widget> items = [
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<Widget> items = [];
+  final controller = ScrollController();
+  bool isVisible = false;
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        isVisible = true;
+      });
+    });
+
+    items = [
       const WhyPaaisInfo(
         headline: "Driving African Innovation",
         infoText:
@@ -34,7 +55,10 @@ class HomePage extends StatelessWidget {
         imagePath: "digital.webp",
       ),
     ];
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(0, 14, 92, 0.5),
       appBar: AppBar(
@@ -67,12 +91,17 @@ class HomePage extends StatelessWidget {
           const EventsCover(
             headline: "1st Pan African AI Summit 2025 (PAAIS)",
             subHeadline:
-                "Harnessing ai to enhance productivity and skills to drive growth across Africa",
+                "Harnessing AI to enhance productivity and skills to drive growth across Africa",
             date: "October 20-22, 2023",
             location: "Accra, Ghana",
           ),
 
-          const CountdownContainer(),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeIn,
+            height: isVisible ? 150 : 0,
+            child: const CountdownContainer(),
+          ),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: GradientText(

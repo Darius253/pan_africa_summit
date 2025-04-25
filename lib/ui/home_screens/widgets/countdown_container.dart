@@ -46,16 +46,20 @@ Widget _countDownText(ThemeData theme, String text, String text2) {
     crossAxisAlignment: CrossAxisAlignment.center,
     spacing: 10,
     children: [
-      Text(
-        text,
-        style: theme.textTheme.displaySmall!.copyWith(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
+      Flexible(
+        child: Text(
+          text,
+          style: theme.textTheme.displaySmall!.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
-      Text(
-        text2,
-        style: theme.textTheme.bodyLarge?.copyWith(color: Colors.white),
+      Flexible(
+        child: Text(
+          text2,
+          style: theme.textTheme.bodyLarge?.copyWith(color: Colors.white),
+        ),
       ),
     ],
   );

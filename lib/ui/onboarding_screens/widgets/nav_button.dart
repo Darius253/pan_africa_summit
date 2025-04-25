@@ -23,6 +23,13 @@ class NavigationButton extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: color ?? Colors.black,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
           ),
           child: Center(child: Icon(icon, color: Colors.white, size: 35)),
         ),
