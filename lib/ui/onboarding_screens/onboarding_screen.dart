@@ -104,11 +104,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               baseColor: Color(0xff2987F2),
               highlightColor: Color(0xffF561FA),
               child: switch (currentPage) {
-                0 => Text(" Swipe >>"),
-                1 => Text("<< Swipe >>"),
-                2 => Text("<< Swipe"),
+                0 => const Text(" Swipe >>"),
+                1 => const Text("<< Swipe >>"),
+                2 => const Text("<< Swipe"),
 
-                _ => Text("Swipe"),
+                _ => const Text("Swipe"),
               },
             ),
           ),
