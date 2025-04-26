@@ -11,7 +11,7 @@ class TravelInformation extends StatelessWidget {
     return ListView(
       controller: scrollController,
       children: [
-        Text(
+        const Text(
           "Travel & Special Requirements",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
@@ -33,7 +33,7 @@ class TravelInformation extends StatelessWidget {
             "None",
           ],
         ),
-        SizedBox(height: 60),
+        const SizedBox(height: 60),
       ],
     );
   }
