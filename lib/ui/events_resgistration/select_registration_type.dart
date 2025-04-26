@@ -105,6 +105,7 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         automaticallyImplyLeading: false,
+        centerTitle: true,
         title: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
