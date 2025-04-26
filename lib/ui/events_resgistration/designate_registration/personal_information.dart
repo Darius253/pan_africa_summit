@@ -42,7 +42,7 @@ class PersonalInformation extends StatelessWidget {
     return ListView(
       controller: scrollController,
       children: [
-        Text(
+        const Text(
           "Personal Information",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
@@ -93,7 +93,7 @@ class PersonalInformation extends StatelessWidget {
           value: selectedGender,
           theme: Theme.of(context),
         ),
-        SizedBox(height: 60),
+        const SizedBox(height: 60),
       ],
     );
   }
