@@ -147,21 +147,17 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          PageView(
-            physics: const NeverScrollableScrollPhysics(),
-            key: PageStorageKey("registration_page"),
-            controller: _pageController,
-            children: _pages,
-
-            onPageChanged: (index) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-          ),
-        ],
+      body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        key: PageStorageKey("registration_page"),
+        controller: _pageController,
+        children: _pages,
+      
+        onPageChanged: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
     );
   }
