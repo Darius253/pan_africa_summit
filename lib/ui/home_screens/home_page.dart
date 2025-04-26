@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/registration_page.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
+import 'package:pan_african_ai_summit/ui/home_screens/events_page.dart';
 import 'package:pan_african_ai_summit/ui/home_screens/main_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    _pages = [const MainPage()];
+    _pages = [const MainPage(), const EventsPage()];
   }
 
   @override
