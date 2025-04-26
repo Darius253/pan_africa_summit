@@ -21,7 +21,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
         children: [
           LottieBuilder.asset(
             'assets/lottie/background.json',
-            width: size.width,
+            width: double.infinity,
             height: size.height,
             fit: BoxFit.cover,
             repeat: true,
