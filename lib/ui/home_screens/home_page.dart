@@ -84,12 +84,18 @@ class _HomePageState extends State<HomePage> {
                 height: 50,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 72, 27, 74).withValues(alpha: 0.2),
+                  color: Color.fromARGB(
+                    255,
+                    255,
+                    255,
+                    255,
+                  ).withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
                   child: BottomNavigationBar(
+                    type: BottomNavigationBarType.fixed,
                     currentIndex: _currentPage,
                     onTap: (value) {
                       setState(() {
@@ -98,9 +104,8 @@ class _HomePageState extends State<HomePage> {
                       _pageController.jumpToPage(value);
                     },
                     backgroundColor: Colors.transparent,
-                    unselectedItemColor: Colors.white,
-                    selectedItemColor: theme.colorScheme.primaryContainer,
-
+                    unselectedItemColor: theme.colorScheme.onPrimaryContainer,
+                    selectedItemColor: Color(0xffF561FA),
                     items: [
                       BottomNavigationBarItem(
                         icon: Icon(Icons.dashboard),
