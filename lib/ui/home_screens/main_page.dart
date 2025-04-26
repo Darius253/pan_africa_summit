@@ -26,6 +26,12 @@ class _MainPageState extends State<MainPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final List<Widget> items = [
       const WhyPaaisInfo(
@@ -64,7 +70,7 @@ class _MainPageState extends State<MainPage> {
         ),
 
         AnimatedContainer(
-          duration: const Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeIn,
           height: _isVisible ? 150 : 0,
           child: const CountdownContainer(),
