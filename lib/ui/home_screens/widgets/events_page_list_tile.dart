@@ -47,7 +47,7 @@ class _AnimatedListTileState extends State<AnimatedListTile> {
         AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
-          height: isRotated ? 200 : 0,
+          height: isRotated ? 800 : 0,
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
