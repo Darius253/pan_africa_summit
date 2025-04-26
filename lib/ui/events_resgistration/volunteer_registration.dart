@@ -49,7 +49,7 @@ class VolunteerRegistrationPage extends StatelessWidget {
         child: ListView(
           controller: scrollController,
           children: [
-            Text(
+            const Text(
               "Volunteer Pass Registration",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
