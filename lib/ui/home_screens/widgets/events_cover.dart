@@ -16,18 +16,17 @@ class EventsCover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final theme = Theme.of(context);
     return Stack(
       children: [
         Image.asset(
           "assets/images/background.webp",
-          width: size.width,
+          width: double.infinity,
           height: 300,
           fit: BoxFit.cover,
         ),
         Container(
-          width: size.width,
+          width: double.infinity,
           height: 300,
           color: Color.fromRGBO(0, 14, 92, 0.5),
         ),
