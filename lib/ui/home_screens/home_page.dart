@@ -17,18 +17,20 @@ class _HomePageState extends State<HomePage> {
   final _pageController = PageController();
   int _currentPage = 0;
   List<Widget> _pages = [];
+  final _eventScrollcontroller = ScrollController();
 
   @override
   void dispose() {
     super.dispose();
     _pageController.dispose();
+    _eventScrollcontroller.dispose();
   }
 
   @override
   void initState() {
     super.initState();
 
-    _pages = [const MainPage(), const EventsPage()];
+    _pages = [const MainPage(), EventsPage(controller: _eventScrollcontroller)];
   }
 
   @override
