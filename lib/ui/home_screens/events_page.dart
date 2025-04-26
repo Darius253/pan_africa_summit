@@ -3,19 +3,19 @@ import 'package:pan_african_ai_summit/ui/home_screens/widgets/events_page_list_t
 import 'package:pan_african_ai_summit/ui/utils/gradient_text.dart';
 
 class EventsPage extends StatelessWidget {
-  const EventsPage({super.key});
+  const EventsPage({super.key, required this.controller});
+  final ScrollController controller;
 
   @override
   Widget build(BuildContext context) {
-    final controller = ScrollController();
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ListView(
-        // physics: const NeverScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         controller: controller,
         children: [
+          
           const GradientText(
             text: "Meet the Visionaries Shaping Africa's AI Future",
             gradient: LinearGradient(
