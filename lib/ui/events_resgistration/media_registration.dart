@@ -61,11 +61,11 @@ class MediaRegistrationPage extends StatelessWidget {
           controller: scrollController,
           scrollDirection: Axis.vertical,
           children: [
-            Text(
+           const Text(
               "Media Pass Registration",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            Row(
+             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 10,
