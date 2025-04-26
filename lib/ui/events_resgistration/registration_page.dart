@@ -76,6 +76,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -91,7 +92,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeIn,
                 height: isVisible ? 350 : 0,
-                width: 400,
+                width: size.width,
                 color: Color(0xFF06004C),
                 child: Padding(
                   padding: EdgeInsets.all(20.0),
@@ -155,7 +156,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               SizedBox(
                 height: 700,
-                width: 400,
+                width: size.width,
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   itemCount: cards.length,
