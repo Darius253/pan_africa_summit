@@ -24,7 +24,7 @@ class ContactInformation extends StatelessWidget {
     return ListView(
       controller: scrollController,
       children: [
-        Text(
+        const Text(
           "Contact Information",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
@@ -62,7 +62,7 @@ class ContactInformation extends StatelessWidget {
             decimal: false,
           ),
         ),
-        SizedBox(height: 60),
+        const SizedBox(height: 60),
       ],
     );
   }
