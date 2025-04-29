@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: SingleChildScrollView(
               child: Container(
-                height: 50,
+                height: 60,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Color.fromARGB(
@@ -104,25 +104,52 @@ class _HomePageState extends State<HomePage> {
                       _pageController.jumpToPage(value);
                     },
                     backgroundColor: Colors.transparent,
-                    unselectedItemColor: theme.colorScheme.onPrimaryContainer,
-                    selectedItemColor: Color(0xffF561FA),
+                    unselectedItemColor: Colors.white,
+                    selectedItemColor: theme.colorScheme.onPrimary,
                     items: [
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.dashboard),
+                        icon:
+                            _currentPage == 0
+                                ? Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffF561FA),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.all(10),
+                                  child: Icon(Icons.dashboard),
+                                )
+                                : Icon(Icons.dashboard),
                         label: "",
-                        backgroundColor: Color.fromARGB(
-                          255,
-                          12,
-                          12,
-                          12,
-                        ).withValues(alpha: 0.2),
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.calendar_month_rounded),
+                        icon:
+                            _currentPage == 1
+                                ? Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffF561FA),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.all(10),
+                                  child: Icon(Icons.calendar_month_rounded),
+                                )
+                                : Icon(Icons.calendar_month_rounded),
                         label: "",
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.settings),
+                        icon:
+                            _currentPage == 2
+                                ? Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffF561FA),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.all(10),
+                                  child: Icon(Icons.settings),
+                                )
+                                : Icon(Icons.settings),
                         label: "",
                       ),
                     ],
