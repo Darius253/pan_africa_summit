@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/utils/gradient_text.dart';
 
 class AnimatedListTile extends StatefulWidget {
+  const AnimatedListTile({super.key, required this.text, required this.child});
   final String text;
-
-  const AnimatedListTile({super.key, required this.text});
+  final Widget? child;
 
   @override
   State<AnimatedListTile> createState() => _AnimatedListTileState();
@@ -47,20 +47,14 @@ class _AnimatedListTileState extends State<AnimatedListTile> {
         AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
-          height: isRotated ? 800 : 0,
+          height: isRotated ? 500 : 0,
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             color: theme.colorScheme.secondaryContainer,
           ),
-          child:
-              isRotated
-                  ? const Text(
-                    "Expanded content goes here",
-                    style: TextStyle(fontSize: 16),
-                  )
-                  : null,
+          child: isRotated ? widget.child : null,
         ),
       ],
     );
