@@ -73,12 +73,12 @@ class AboutSpeakerPage extends StatelessWidget {
                 ],
               ),
 
-              const SizedBox(height: 10),
-
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 "About the Speaker",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 10),
               const Text("""
