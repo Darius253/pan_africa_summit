@@ -84,12 +84,7 @@ class _HomePageState extends State<HomePage> {
                 height: 60,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(
-                    255,
-                    255,
-                    255,
-                    255,
-                  ).withValues(alpha: 0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: SingleChildScrollView(
@@ -110,29 +105,15 @@ class _HomePageState extends State<HomePage> {
                       BottomNavigationBarItem(
                         icon:
                             _currentPage == 0
-                                ? Container(
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffF561FA),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.all(10),
-                                  child: Icon(Icons.dashboard),
-                                )
+                                ? _buildIconContainer(Icons.dashboard)
                                 : Icon(Icons.dashboard),
                         label: "",
                       ),
                       BottomNavigationBarItem(
                         icon:
                             _currentPage == 1
-                                ? Container(
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffF561FA),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.all(10),
-                                  child: Icon(Icons.calendar_month_rounded),
+                                ? _buildIconContainer(
+                                  Icons.calendar_month_rounded,
                                 )
                                 : Icon(Icons.calendar_month_rounded),
                         label: "",
@@ -140,15 +121,7 @@ class _HomePageState extends State<HomePage> {
                       BottomNavigationBarItem(
                         icon:
                             _currentPage == 2
-                                ? Container(
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffF561FA),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.all(10),
-                                  child: Icon(Icons.settings),
-                                )
+                                ? _buildIconContainer(Icons.settings)
                                 : Icon(Icons.settings),
                         label: "",
                       ),
@@ -162,4 +135,13 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+Widget _buildIconContainer(IconData icon) {
+  return Container(
+    decoration: BoxDecoration(color: Color(0xffF561FA), shape: BoxShape.circle),
+    alignment: Alignment.center,
+    padding: const EdgeInsets.all(10),
+    child: Icon(icon),
+  );
 }
