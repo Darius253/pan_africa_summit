@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/utils/gradient_text.dart';
 
 class AnimatedListTile extends StatefulWidget {
-  const AnimatedListTile({super.key, required this.text, required this.child});
+  const AnimatedListTile({
+    super.key,
+    required this.text,
+    required this.child,
+    this.eventDays,
+    required this.isAgenda,
+  });
   final String text;
-  final Widget? child;
+  final Widget child;
+  final Widget? eventDays;
+  final bool isAgenda;
 
   @override
   State<AnimatedListTile> createState() => _AnimatedListTileState();
@@ -44,6 +52,7 @@ class _AnimatedListTileState extends State<AnimatedListTile> {
             ),
           ),
         ),
+        if (widget.isAgenda && isRotated) widget.eventDays ?? const SizedBox(),
         AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
