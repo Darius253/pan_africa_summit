@@ -5,6 +5,7 @@ import 'package:pan_african_ai_summit/ui/events_resgistration/registration_page.
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
 import 'package:pan_african_ai_summit/ui/home_screens/events_page.dart';
 import 'package:pan_african_ai_summit/ui/home_screens/main_page.dart';
+import 'package:pan_african_ai_summit/ui/home_screens/settings_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,7 +31,11 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    _pages = [const MainPage(), EventsPage(controller: _eventScrollcontroller)];
+    _pages = [
+      const MainPage(),
+      EventsPage(controller: _eventScrollcontroller),
+      const SettingsPage(),
+    ];
   }
 
   @override
