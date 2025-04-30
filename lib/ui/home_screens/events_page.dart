@@ -32,6 +32,25 @@ class EventsPage extends StatelessWidget {
           const SizedBox(height: 20),
           AnimatedListTile(
             text: "View Full Agenda",
+            isAgenda: true,
+            eventDays: SizedBox(
+              height: 50,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (_, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: PrimaryButton(
+                      onPressed: () {},
+                      color: theme.colorScheme.tertiaryContainer,
+                      text: "Day ${index + 1}",
+                    ),
+                  );
+                },
+                itemCount: 6,
+                shrinkWrap: true,
+              ),
+            ),
             child: ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
               itemBuilder: (_, index) {
@@ -49,6 +68,7 @@ class EventsPage extends StatelessWidget {
           const SizedBox(height: 20),
           AnimatedListTile(
             text: "View Speakers",
+            isAgenda: false,
             child: GridView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -58,27 +78,22 @@ class EventsPage extends StatelessWidget {
                 mainAxisExtent: 300,
               ),
               itemBuilder: (_, index) {
-                return Hero(
-                  tag: "speaker$index",
-                  transitionOnUserGestures: true,
-                  createRectTween: (begin, end) {
-                    return MaterialRectCenterArcTween(begin: begin, end: end);
+                return _buildSpeakersCard(
+                  theme,
+                  null,
+                  "Speaker Name",
+                  "Founder & CEO at DecisiveAI – Former Minister of Digital Transition and Administrative Reform of Morocco",
+                  () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) =>
+                                AboutSpeakerPage(heroTag: "speaker$index"),
+                      ),
+                    );
                   },
-
-                  child: _buildSpeakersCard(
-                    theme,
-                    null,
-                    "Speaker Name",
-                    "Founder & CEO at DecisiveAI – Former Minister of Digital Transition and Administrative Reform of Morocco",
-                    () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AboutSpeakerPage(),
-                        ),
-                      );
-                    },
-                  ),
+                  "speaker$index",
                 );
               },
               itemCount: 5,
@@ -127,6 +142,7 @@ Widget _buildSpeakersCard(
   String name,
   String bio,
   Function()? onPressed,
+  String heroTag,
 ) {
   return Container(
     padding: const EdgeInsets.all(10),
@@ -145,7 +161,10 @@ Widget _buildSpeakersCard(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CircleAvatar(radius: 50, backgroundColor: Colors.amber),
+        Hero(
+          tag: heroTag,
+          child: CircleAvatar(radius: 50, backgroundColor: Colors.amber),
+        ),
         GradientText(
           text: name,
           style: theme.textTheme.titleLarge?.copyWith(
