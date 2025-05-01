@@ -44,10 +44,11 @@ class EventsPage extends StatelessWidget {
                       onPressed: () {},
                       color: theme.colorScheme.tertiaryContainer,
                       text: "Day ${index + 1}",
+                      textColor: theme.colorScheme.onTertiaryContainer,
                     ),
                   );
                 },
-                itemCount: 6,
+                itemCount: 2,
                 shrinkWrap: true,
               ),
             ),
