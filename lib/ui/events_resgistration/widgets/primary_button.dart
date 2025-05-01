@@ -7,11 +7,13 @@ class PrimaryButton extends StatelessWidget {
     required this.text,
     this.color,
     this.icon,
+    this.textColor,
   });
   final void Function()? onPressed;
   final String text;
   final Color? color;
   final Widget? icon;
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -36,7 +38,7 @@ class PrimaryButton extends StatelessWidget {
                 title: Text(
                   text,
                   style: theme.textTheme.bodyLarge!.copyWith(
-                    color: Colors.white,
+                    color: textColor ?? Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -44,7 +46,7 @@ class PrimaryButton extends StatelessWidget {
               : Text(
                 text,
                 style: theme.textTheme.bodyLarge!.copyWith(
-                  color: Colors.white,
+                  color: textColor ?? Colors.white,
                   fontWeight: FontWeight.w500,
                 ),
               ),
