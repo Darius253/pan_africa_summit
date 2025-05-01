@@ -22,6 +22,7 @@ class SettingsPage extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => AboutUsPage()),
             ),
+            null,
           ),
 
           //Privacy Policy
@@ -34,6 +35,7 @@ class SettingsPage extends StatelessWidget {
             () {
               // Handle privacy policy action
             },
+            null,
           ),
 
           //Contact Developer
@@ -44,8 +46,28 @@ class SettingsPage extends StatelessWidget {
             Icons.contact_mail,
             theme.colorScheme.onSurface,
             () {
-              // Handle contact developer action
+              _showContactDevelopeBottomrSheet(context, theme);
             },
+            null,
+          ),
+          _buildSettingsTile(
+            theme,
+            "Email Us",
+            "Get in touch with us",
+            Icons.email,
+            theme.colorScheme.onSurface,
+            () {},
+            null,
+          ),
+
+          _buildSettingsTile(
+            theme,
+            "Share App",
+            "Share the app with others",
+            Icons.adaptive.share,
+            theme.colorScheme.onSurface,
+            () {},
+            null,
           ),
 
           //Logout
@@ -58,6 +80,7 @@ class SettingsPage extends StatelessWidget {
             () {
               // Handle logout action
             },
+            null,
           ),
 
           //Delete Account
@@ -70,6 +93,7 @@ class SettingsPage extends StatelessWidget {
             () {
               // Handle delete account action
             },
+            null,
           ),
         ],
       ),
@@ -84,6 +108,7 @@ Widget _buildSettingsTile(
   IconData icon,
   Color color,
   Function()? onTap,
+  Widget? trailing,
 ) {
   return ListTile(
     contentPadding: const EdgeInsets.all(0),
@@ -100,7 +125,66 @@ Widget _buildSettingsTile(
         color: color.withValues(alpha: 0.7),
       ),
     ),
-    trailing: Icon(icon, color: color),
+    trailing: trailing ?? Icon(icon, color: color),
     onTap: onTap,
+  );
+}
+
+Future<void> _showContactDevelopeBottomrSheet(
+  BuildContext context,
+  ThemeData theme,
+) {
+  return showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    showDragHandle: true,
+    isDismissible: true,
+    enableDrag: true,
+    isScrollControlled: true,
+    barrierColor: theme.colorScheme.primary.withValues(alpha: 0.5),
+
+    builder:
+        (context) => Container(
+          height: 300,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surface,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              spacing: 20,
+              children: [
+                _buildSettingsTile(
+                  theme,
+                  "Contact via LinkedIn",
+                  "Connect on LinkedIn",
+                  Icons.link,
+                  theme.colorScheme.onSurface,
+                  () {},
+                  Image.asset(
+                    "assets/images/linkedin.png",
+                    height: 30,
+                    width: 30,
+                  ),
+                ),
+
+                _buildSettingsTile(
+                  theme,
+                  "Contact via Email",
+                  "Email Developer",
+                  Icons.email,
+                  theme.colorScheme.onSurface,
+                  () {},
+                  null,
+                ),
+              ],
+            ),
+          ),
+        ),
   );
 }
