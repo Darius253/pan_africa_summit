@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/home_screens/about_us_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -7,6 +8,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.all(20),
@@ -56,7 +58,11 @@ class SettingsPage extends StatelessWidget {
             "Get in touch with us",
             Icons.email,
             theme.colorScheme.onSurface,
-            () {},
+            () {
+              _launchUrl(
+                "mailto:info@panafricanaisummit.com?subject=Enquiry%20About%20The%20Summit&body=Dear%20Team,",
+              );
+            },
             null,
           ),
 
@@ -165,7 +171,11 @@ Future<void> _showContactDevelopeBottomrSheet(
                   "Connect on LinkedIn",
                   Icons.link,
                   theme.colorScheme.onSurface,
-                  () {},
+                  () {
+                    _launchUrl(
+                      "https://www.linkedin.com/in/twumasi-ankrah-darius/",
+                    );
+                  },
                   Image.asset(
                     "assets/images/linkedin.png",
                     height: 30,
@@ -179,7 +189,11 @@ Future<void> _showContactDevelopeBottomrSheet(
                   "Email Developer",
                   Icons.email,
                   theme.colorScheme.onSurface,
-                  () {},
+                  () {
+                    _launchUrl(
+                      "mailto:trondarius13@gmail.com?subject=Feedback&body=Dear%20Darius,",
+                    );
+                  },
                   null,
                 ),
               ],
@@ -187,4 +201,10 @@ Future<void> _showContactDevelopeBottomrSheet(
           ),
         ),
   );
+}
+
+Future<void> _launchUrl(String url) async {
+  if (!await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication)) {
+    throw 'Could not launch $url';
+  }
 }
