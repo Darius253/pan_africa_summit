@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class CountdownContainer extends StatefulWidget {
@@ -8,6 +10,43 @@ class CountdownContainer extends StatefulWidget {
 }
 
 class _CountdownContainerState extends State<CountdownContainer> {
+  final DateTime _eventDate = DateTime.utc(2025, 9, 23, 8, 0, 0);
+  late Timer _timer;
+  Duration _remainingTime = Duration.zero;
+
+  @override
+  void initState() {
+    super.initState();
+    _calculateRemainingTime();
+    _startTimer();
+  }
+
+  void _calculateRemainingTime() {
+    final now = DateTime.now().toUtc();
+    if (_eventDate.isAfter(now)) {
+      _remainingTime = _eventDate.difference(now);
+    } else {
+      _remainingTime = Duration.zero;
+    }
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        _calculateRemainingTime();
+        if (_remainingTime.inSeconds <= 0) {
+          _timer.cancel();
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -32,10 +71,26 @@ class _CountdownContainerState extends State<CountdownContainer> {
           crossAxisAlignment: CrossAxisAlignment.center,
           spacing: 20,
           children: [
-            _countDownText(Theme.of(context), "152", "Days"),
-            _countDownText(Theme.of(context), "17", "Hours"),
-            _countDownText(Theme.of(context), "10", "Minutes"),
-            _countDownText(Theme.of(context), "5", "Seconds"),
+            _countDownText(
+              Theme.of(context),
+              "${_remainingTime.inDays}",
+              "Days",
+            ),
+            _countDownText(
+              Theme.of(context),
+              "${_remainingTime.inHours % 24}",
+              "Hours",
+            ),
+            _countDownText(
+              Theme.of(context),
+              "${_remainingTime.inMinutes % 60}",
+              "Minutes",
+            ),
+            _countDownText(
+              Theme.of(context),
+              "${_remainingTime.inSeconds % 60}",
+              "Hours",
+            ),
           ],
         ),
       ),
