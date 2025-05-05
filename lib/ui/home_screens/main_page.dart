@@ -11,9 +11,11 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage>
+    with AutomaticKeepAliveClientMixin {
   final ScrollController _controller = ScrollController();
   bool _isVisible = false;
+  List<Widget> _items = [];
 
   @override
   void initState() {
@@ -23,17 +25,8 @@ class _MainPageState extends State<MainPage> {
         _isVisible = true;
       });
     });
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final List<Widget> items = [
+    _items = [
       const WhyPaaisInfo(
         headline: "Driving African Innovation",
         infoText:
@@ -55,7 +48,20 @@ class _MainPageState extends State<MainPage> {
         imagePath: "digital.webp",
       ),
     ];
+  }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
     return ListView(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
@@ -90,7 +96,7 @@ class _MainPageState extends State<MainPage> {
             scrollDirection: Axis.horizontal,
             separatorBuilder: (context, index) => const SizedBox(width: 20),
             itemCount: 3,
-            itemBuilder: (context, index) => items[index],
+            itemBuilder: (context, index) => _items[index],
           ),
         ),
         const SizedBox(height: 20),
