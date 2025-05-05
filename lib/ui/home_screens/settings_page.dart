@@ -229,6 +229,7 @@ Future<void> _alertPopUp(
   return showAdaptiveDialog(
     context: context,
     barrierColor: theme.colorScheme.primary.withValues(alpha: 0.5),
+    barrierDismissible: true,
     builder:
         (_) => AlertDialog.adaptive(
           backgroundColor: theme.colorScheme.surface,
