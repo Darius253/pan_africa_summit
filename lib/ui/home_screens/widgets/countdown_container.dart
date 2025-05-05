@@ -89,7 +89,7 @@ class _CountdownContainerState extends State<CountdownContainer> {
             _countDownText(
               Theme.of(context),
               "${_remainingTime.inSeconds % 60}",
-              "Hours",
+              "Seconds",
             ),
           ],
         ),
