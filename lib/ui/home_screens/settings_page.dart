@@ -84,7 +84,15 @@ class SettingsPage extends StatelessWidget {
             Icons.logout_sharp,
             theme.colorScheme.error,
             () {
-              // Handle logout action
+              _alertPopUp(
+                context,
+                theme,
+                "Logout?",
+                "Are you sure you want to logout? You will need to login again to access your account.",
+                () {
+                  // Handle logout action
+                },
+              );
             },
             null,
           ),
@@ -97,7 +105,15 @@ class SettingsPage extends StatelessWidget {
             Icons.delete,
             theme.colorScheme.error,
             () {
-              // Handle delete account action
+              _alertPopUp(
+                context,
+                theme,
+                "Delete Account?",
+                "Are you sure you want to delete your account? This action cannot be undone.",
+                () {
+                  // Handle delete account action
+                },
+              );
             },
             null,
           ),
@@ -150,7 +166,7 @@ Future<void> _showContactDevelopeBottomrSheet(
     barrierColor: theme.colorScheme.primary.withValues(alpha: 0.5),
 
     builder:
-        (context) => Container(
+        (_) => Container(
           height: 300,
           width: double.infinity,
           decoration: BoxDecoration(
@@ -199,6 +215,56 @@ Future<void> _showContactDevelopeBottomrSheet(
               ],
             ),
           ),
+        ),
+  );
+}
+
+Future<void> _alertPopUp(
+  BuildContext context,
+  ThemeData theme,
+  String title,
+  String content,
+  Function() onPressed,
+) {
+  return showAdaptiveDialog(
+    context: context,
+    barrierColor: theme.colorScheme.primary.withValues(alpha: 0.5),
+    builder:
+        (_) => AlertDialog.adaptive(
+          backgroundColor: theme.colorScheme.surface,
+          title: Text(
+            title,
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: theme.colorScheme.error,
+            ),
+          ),
+          content: Text(
+            content,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => onPressed(),
+              child: Text(
+                "Yes",
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.error,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                "No",
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                ),
+              ),
+            ),
+          ],
         ),
   );
 }
