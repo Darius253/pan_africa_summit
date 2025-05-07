@@ -23,4 +23,10 @@ class AuthenticationRepository {
       return Future.error(e);
     }
   }
+
+
+  Future<void> signOut() async {
+    await GoogleSignIn().signOut();
+    await FirebaseAuth.instance.signOut();
+  }
 }
