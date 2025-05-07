@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pan_african_ai_summit/ui/onboarding_screens/authentication_page.dart';
+import 'package:pan_african_ai_summit/ui/onboarding_screens/authentication/authentication_page.dart';
+import 'package:pan_african_ai_summit/ui/onboarding_screens/authentication/authentication_view_model.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/nav_button.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/onboarding_item.dart';
 import 'package:shimmer/shimmer.dart';
@@ -86,7 +87,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const AuthenticationPage(),
+                          builder:
+                              (context) => AuthenticationPage(
+                                authenticationViewModel:
+                                    AuthenticationViewModel(),
+                              ),
                         ),
                       );
                       setState(() {
