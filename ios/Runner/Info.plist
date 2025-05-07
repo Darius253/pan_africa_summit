@@ -56,5 +56,16 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>GIDClientID</key>
+	<string>970625054280-oakr4vmcvpukp0sesbvtu0pq8mi77u3j.apps.googleusercontent.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+	<dict>
+		<key>CFBundleURLSchemes</key>
+		<array>
+		<string>com.googleusercontent.apps.970625054280-oakr4vmcvpukp0sesbvtu0pq8mi77u3j</string>
+		</array>
+	</dict>
+	</array>
 </dict>
 </plist>
