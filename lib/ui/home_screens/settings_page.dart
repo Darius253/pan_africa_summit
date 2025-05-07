@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
 import 'package:pan_african_ai_summit/ui/home_screens/about_us_page.dart';
+import 'package:pan_african_ai_summit/ui/onboarding_screens/authentication/authentication_view_model.dart';
+import 'package:pan_african_ai_summit/ui/onboarding_screens/onboarding_screen.dart';
+import 'package:pan_african_ai_summit/ui/utils/loading.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -8,116 +12,146 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final AuthenticationViewModel viewModal = AuthenticationViewModel();
 
     return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.all(20),
-        children: [
-          //About Us
-          _buildSettingsTile(
-            theme,
-            "About Us",
-            "About the Pan-African AI Summit",
-            Icons.info,
-            theme.colorScheme.onSurface,
-            () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AboutUsPage()),
-            ),
-            null,
-          ),
-
-          //Privacy Policy
-          _buildSettingsTile(
-            theme,
-            "Privacy Policy",
-            "Read our privacy policy",
-            Icons.privacy_tip,
-            theme.colorScheme.onSurface,
-            () {
-              // Handle privacy policy action
-            },
-            null,
-          ),
-
-          //Contact Developer
-          _buildSettingsTile(
-            theme,
-            "Contact Developer",
-            "",
-            Icons.contact_mail,
-            theme.colorScheme.onSurface,
-            () {
-              _showContactDevelopeBottomrSheet(context, theme);
-            },
-            null,
-          ),
-          _buildSettingsTile(
-            theme,
-            "Email Us",
-            "Get in touch with us",
-            Icons.email,
-            theme.colorScheme.onSurface,
-            () {
-              _launchUrl(
-                "mailto:info@panafricanaisummit.com?subject=Enquiry%20About%20The%20Summit&body=Dear%20Team,",
-              );
-            },
-            null,
-          ),
-
-          _buildSettingsTile(
-            theme,
-            "Share App",
-            "Share the app with others",
-            Icons.adaptive.share,
-            theme.colorScheme.onSurface,
-            () {},
-            null,
-          ),
-
-          //Logout
-          _buildSettingsTile(
-            theme,
-            "Logout",
-            "Logout from the app",
-            Icons.logout_sharp,
-            theme.colorScheme.error,
-            () {
-              _alertPopUp(
+      body: ListenableBuilder(
+        listenable: viewModal,
+        builder: (context, _) {
+          if (viewModal.isLoading) {
+            return const Loading();
+          }
+          if (viewModal.errorMessage != null) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              CustomSnackBar.show(
                 context,
-                theme,
-                "Logout?",
-                "Are you sure you want to logout? You will need to login again to access your account.",
-                () {
-                  // Handle logout action
-                },
+                viewModal.errorMessage!,
+                isError: true,
               );
-            },
-            null,
-          ),
+            });
+          }
 
-          //Delete Account
-          _buildSettingsTile(
-            theme,
-            "Delete Account",
-            "Remove your account from our system",
-            Icons.delete,
-            theme.colorScheme.error,
-            () {
-              _alertPopUp(
-                context,
+          return ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              //About Us
+              _buildSettingsTile(
                 theme,
-                "Delete Account?",
-                "Are you sure you want to delete your account? This action cannot be undone.",
+                "About Us",
+                "About the Pan-African AI Summit",
+                Icons.info,
+                theme.colorScheme.onSurface,
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AboutUsPage()),
+                ),
+                null,
+              ),
+
+              //Privacy Policy
+              _buildSettingsTile(
+                theme,
+                "Privacy Policy",
+                "Read our privacy policy",
+                Icons.privacy_tip,
+                theme.colorScheme.onSurface,
                 () {
-                  // Handle delete account action
+                  // Handle privacy policy action
                 },
-              );
-            },
-            null,
-          ),
-        ],
+                null,
+              ),
+
+              //Contact Developer
+              _buildSettingsTile(
+                theme,
+                "Contact Developer",
+                "",
+                Icons.contact_mail,
+                theme.colorScheme.onSurface,
+                () {
+                  _showContactDevelopeBottomrSheet(context, theme);
+                },
+                null,
+              ),
+              _buildSettingsTile(
+                theme,
+                "Email Us",
+                "Get in touch with us",
+                Icons.email,
+                theme.colorScheme.onSurface,
+                () {
+                  _launchUrl(
+                    "mailto:info@panafricanaisummit.com?subject=Enquiry%20About%20The%20Summit&body=Dear%20Team,",
+                  );
+                },
+                null,
+              ),
+
+              _buildSettingsTile(
+                theme,
+                "Share App",
+                "Share the app with others",
+                Icons.adaptive.share,
+                theme.colorScheme.onSurface,
+                () {},
+                null,
+              ),
+
+              //Logout
+              _buildSettingsTile(
+                theme,
+                "Logout",
+                "Logout from the app",
+                Icons.logout_sharp,
+                theme.colorScheme.error,
+                () {
+                  _alertPopUp(
+                    context,
+                    theme,
+                    "Logout?",
+                    "Are you sure you want to logout? You will need to login again to access your account.",
+                    () async {
+                      await viewModal.signOut();
+                      if (viewModal.isSignedOut) {
+                        if (context.mounted) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const OnBoardingScreen(),
+                            ),
+                          );
+                          CustomSnackBar.show(context, "Logout Successful");
+                        }
+                      }
+                    },
+                  );
+                },
+                null,
+              ),
+
+              //Delete Account
+              _buildSettingsTile(
+                theme,
+                "Delete Account",
+                "Remove your account from our system",
+                Icons.delete,
+                theme.colorScheme.error,
+                () {
+                  _alertPopUp(
+                    context,
+                    theme,
+                    "Delete Account?",
+                    "Are you sure you want to delete your account? This action cannot be undone.",
+                    () {
+                      // Handle delete account action
+                    },
+                  );
+                },
+                null,
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -248,7 +282,7 @@ Future<void> _alertPopUp(
           ),
           actions: [
             TextButton(
-              onPressed: () => onPressed(),
+              onPressed: onPressed,
               child: Text(
                 "Yes",
                 style: theme.textTheme.bodyLarge?.copyWith(
