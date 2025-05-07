@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/firebase_options.dart';
 import 'package:pan_african_ai_summit/theme.dart';
-import 'package:pan_african_ai_summit/ui/onboarding_screens/onboarding_screen.dart';
 import 'package:pan_african_ai_summit/util.dart';
+import 'package:pan_african_ai_summit/wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
 
       theme: brightness == Brightness.light ? theme.light() : theme.dark(),
 
-      home: const OnBoardingScreen(),
+      home: Wrapper(),
+      
     );
   }
 }
