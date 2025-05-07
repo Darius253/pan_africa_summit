@@ -17,7 +17,7 @@ class WhyPaaisInfo extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(20),
       width: 380,
-      height: 590,
+      height: 600,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
