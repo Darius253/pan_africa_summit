@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
-import 'package:pan_african_ai_summit/ui/home_screens/about_speaker_page.dart';
 import 'package:pan_african_ai_summit/ui/home_screens/widgets/events_page_list_tile.dart';
+import 'package:pan_african_ai_summit/ui/home_screens/widgets/speakers_list.dart';
 import 'package:pan_african_ai_summit/ui/utils/gradient_text.dart';
 
 class EventsPage extends StatelessWidget {
@@ -70,36 +70,7 @@ class EventsPage extends StatelessWidget {
           AnimatedListTile(
             text: "View Speakers",
             isAgenda: false,
-            child: GridView.builder(
-              physics: const AlwaysScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                mainAxisExtent: 300,
-              ),
-              itemBuilder: (_, index) {
-                return _buildSpeakersCard(
-                  theme,
-                  null,
-                  "Speaker Name",
-                  "Founder & CEO at DecisiveAI – Former Minister of Digital Transition and Administrative Reform of Morocco",
-                  () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (context) =>
-                                AboutSpeakerPage(heroTag: "speaker$index"),
-                      ),
-                    );
-                  },
-                  "speaker$index",
-                );
-              },
-              itemCount: 5,
-              shrinkWrap: true,
-            ),
+            child: SpeakersList()
           ),
         ],
       ),
@@ -133,61 +104,6 @@ Widget _buildAgendaTile(
       style: theme.textTheme.bodyMedium?.copyWith(
         color: theme.colorScheme.onSecondaryContainer,
       ),
-    ),
-  );
-}
-
-Widget _buildSpeakersCard(
-  ThemeData theme,
-  String? imageUrl,
-  String name,
-  String bio,
-  Function()? onPressed,
-  String heroTag,
-) {
-  return Container(
-    padding: const EdgeInsets.all(10),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(15),
-      border: Border.all(
-        color: theme.colorScheme.onSecondaryContainer,
-        width: 2,
-      ),
-      color: theme.colorScheme.secondaryContainer,
-      shape: BoxShape.rectangle,
-    ),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      spacing: 10,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Hero(
-          tag: heroTag,
-          child: CircleAvatar(radius: 50, backgroundColor: Colors.amber),
-        ),
-        GradientText(
-          text: name,
-          style: theme.textTheme.titleLarge?.copyWith(
-            color: theme.colorScheme.primary,
-            fontWeight: FontWeight.bold,
-          ),
-          gradient: const LinearGradient(
-            colors: [Color(0xff2987F2), Color(0xffF561FA)],
-          ),
-        ),
-
-        Text(
-          bio,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: theme.colorScheme.onSecondaryContainer,
-          ),
-          textAlign: TextAlign.center,
-          maxLines: 3,
-          overflow: TextOverflow.ellipsis,
-        ),
-        PrimaryButton(text: "View Profile", onPressed: onPressed),
-      ],
     ),
   );
 }
