@@ -50,6 +50,7 @@ class _CountdownContainerState extends State<CountdownContainer> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      key: const PageStorageKey<String>("countdown_container"),
       physics: const NeverScrollableScrollPhysics(),
       child: Container(
         width: double.infinity,
