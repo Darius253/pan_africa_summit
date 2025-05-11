@@ -32,6 +32,7 @@ class _AnimatedListTileState extends State<AnimatedListTile> {
     final theme = Theme.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
+      key: const PageStorageKey<String>("animated_list_tile"),
       children: [
         ListTile(
           contentPadding: const EdgeInsets.all(0),
