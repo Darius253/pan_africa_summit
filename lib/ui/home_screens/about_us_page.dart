@@ -37,6 +37,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
       body: SafeArea(
         child: ListView(
           controller: _scrollController,
+          key: const PageStorageKey("about_us_page"),
           children: [
             AnimatedContainer(
               clipBehavior: Clip.hardEdge,
