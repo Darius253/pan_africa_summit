@@ -17,8 +17,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _pageController = PageController();
   int _currentPage = 0;
-  List<Widget> _pages = [];
-  final _eventScrollcontroller = ScrollController();
+  late final List<Widget> _pages = [
+    const MainPage(),
+    EventsPage(controller: _eventScrollcontroller),
+    const SettingsPage(),
+  ];
+  late final _eventScrollcontroller = ScrollController();
 
   @override
   void dispose() {
@@ -30,12 +34,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
-    _pages = [
-      const MainPage(),
-      EventsPage(controller: _eventScrollcontroller),
-      const SettingsPage(),
-    ];
   }
 
   @override
@@ -111,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                         icon:
                             _currentPage == 0
                                 ? _buildIconContainer(Icons.dashboard)
-                                : Icon(Icons.dashboard),
+                                : const Icon(Icons.dashboard),
                         label: "",
                       ),
                       BottomNavigationBarItem(
@@ -120,14 +118,14 @@ class _HomePageState extends State<HomePage> {
                                 ? _buildIconContainer(
                                   Icons.calendar_month_rounded,
                                 )
-                                : Icon(Icons.calendar_month_rounded),
+                                : const Icon(Icons.calendar_month_rounded),
                         label: "",
                       ),
                       BottomNavigationBarItem(
                         icon:
                             _currentPage == 2
                                 ? _buildIconContainer(Icons.settings)
-                                : Icon(Icons.settings),
+                                : const Icon(Icons.settings),
                         label: "",
                       ),
                     ],
