@@ -15,7 +15,28 @@ class _MainPageState extends State<MainPage>
     with AutomaticKeepAliveClientMixin {
   final ScrollController _controller = ScrollController();
   bool _isVisible = false;
-  List<Widget> _items = [];
+  late final List<Widget> _items = [
+    const WhyPaaisInfo(
+      headline: "Driving African Innovation",
+      infoText:
+          "The Pan African AI Summit is uniquely positioned to catalyze the development and deployment of AI AI-powered solutions that address Africa’s most pressing challenges. By bringing together the brightest minds from across the continent and the globe, we aim to foster an ecosystem of innovation and collaboration that empowers Africans to lead the way in shaping the future of AI.",
+      imagePath: "drive.webp",
+    ),
+    const WhyPaaisInfo(
+      headline: "Promoting Inclusive Growth",
+      infoText:
+          "We recognize that the benefits of AI must be equitably distributed to ensure that no one is left behind. The Pan African AI Summit is committed to championing policies, initiatives, and partnerships that prioritize the needs of marginalized communities and promote the inclusive development of AI technologies."
+          "",
+      imagePath: "growth.webp",
+    ),
+    const WhyPaaisInfo(
+      headline: "Bridging the Digital Divide",
+      infoText:
+          "Africa’s digital transformation is crucial for unlocking the continent’s vast potential. The Pan African AI Summit serves as a platform to bridge the digital divide, fostering collaboration and knowledge exchange that empower African nations to harness the power of emerging technologies, including AI, to drive sustainable development and improve the lives of their citizens."
+          "",
+      imagePath: "digital.webp",
+    ),
+  ];
 
   @override
   void initState() {
@@ -25,29 +46,6 @@ class _MainPageState extends State<MainPage>
         _isVisible = true;
       });
     });
-
-    _items = [
-      const WhyPaaisInfo(
-        headline: "Driving African Innovation",
-        infoText:
-            "The Pan African AI Summit is uniquely positioned to catalyze the development and deployment of AI AI-powered solutions that address Africa’s most pressing challenges. By bringing together the brightest minds from across the continent and the globe, we aim to foster an ecosystem of innovation and collaboration that empowers Africans to lead the way in shaping the future of AI.",
-        imagePath: "drive.webp",
-      ),
-      const WhyPaaisInfo(
-        headline: "Promoting Inclusive Growth",
-        infoText:
-            "We recognize that the benefits of AI must be equitably distributed to ensure that no one is left behind. The Pan African AI Summit is committed to championing policies, initiatives, and partnerships that prioritize the needs of marginalized communities and promote the inclusive development of AI technologies."
-            "",
-        imagePath: "growth.webp",
-      ),
-      const WhyPaaisInfo(
-        headline: "Bridging the Digital Divide",
-        infoText:
-            "Africa’s digital transformation is crucial for unlocking the continent’s vast potential. The Pan African AI Summit serves as a platform to bridge the digital divide, fostering collaboration and knowledge exchange that empower African nations to harness the power of emerging technologies, including AI, to drive sustainable development and improve the lives of their citizens."
-            "",
-        imagePath: "digital.webp",
-      ),
-    ];
   }
 
   @override
@@ -63,6 +61,7 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     super.build(context);
     return ListView(
+      key: const PageStorageKey<String>("main_page"),
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       controller: _controller,
