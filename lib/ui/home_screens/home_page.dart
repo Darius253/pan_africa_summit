@@ -16,13 +16,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _pageController = PageController();
+  late final _eventScrollcontroller = ScrollController();
   int _currentPage = 0;
   late final List<Widget> _pages = [
     const MainPage(),
     EventsPage(controller: _eventScrollcontroller),
     const SettingsPage(),
   ];
-  late final _eventScrollcontroller = ScrollController();
+  
 
   @override
   void dispose() {
