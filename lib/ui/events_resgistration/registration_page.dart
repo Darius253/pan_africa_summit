@@ -13,7 +13,48 @@ class RegistrationPage extends StatefulWidget {
 
 class _RegistrationPageState extends State<RegistrationPage> {
   final _scrollController = ScrollController();
-  List<Widget> cards = [];
+  late final List<Widget> cards = [
+    const RegistrationTypeCard(
+      title: "Delegate Pass",
+      infoText: [
+        "2-Day Pass to PAIAS 2025.",
+        "Access to all sessions and workshops.",
+        "Entry to AI exhibitions and showcase areas.",
+        "Networking opportunities with industry leaders.",
+        "Refreshments.",
+        "Conference materials and digital post-event reports.",
+        "*Complimentary event merchandise.",
+      ],
+    ),
+    const RegistrationTypeCard(
+      title: "Media Pass",
+      infoText: [
+        "Exclusive press conferences and media briefings.",
+        "Interviews with speakers and industry leaders.",
+        "Reserved media seating and workspaces.",
+      ],
+      description: [
+        "Journalists from print, digital, and broadcast media.",
+        "AI and tech bloggers.",
+        "Content creators and digital influencers.",
+        "Documentary filmmakers and podcasters.",
+      ],
+    ),
+    const RegistrationTypeCard(
+      title: "Volunteer Pass",
+      infoText: [
+        "Event logistics, registrations, and guest management.",
+        "Technical support.",
+        "Guiding delegates and exhibitors.",
+      ],
+      description: [
+        "University students and young professionals.",
+        "AI and tech enthusiasts looking for networking opportunities.",
+        "Individuals passionate about event management.",
+      ],
+    ),
+  ];
+
   bool isVisible = false;
 
   @override
@@ -24,47 +65,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
         isVisible = true;
       });
     });
-    cards = [
-      const RegistrationTypeCard(
-        title: "Delegate Pass",
-        infoText: [
-          "2-Day Pass to PAIAS 2025.",
-          "Access to all sessions and workshops.",
-          "Entry to AI exhibitions and showcase areas.",
-          "Networking opportunities with industry leaders.",
-          "Refreshments.",
-          "Conference materials and digital post-event reports.",
-          "*Complimentary event merchandise.",
-        ],
-      ),
-      const RegistrationTypeCard(
-        title: "Media Pass",
-        infoText: [
-          "Exclusive press conferences and media briefings.",
-          "Interviews with speakers and industry leaders.",
-          "Reserved media seating and workspaces.",
-        ],
-        description: [
-          "Journalists from print, digital, and broadcast media.",
-          "AI and tech bloggers.",
-          "Content creators and digital influencers.",
-          "Documentary filmmakers and podcasters.",
-        ],
-      ),
-      const RegistrationTypeCard(
-        title: "Volunteer Pass",
-        infoText: [
-          "Event logistics, registrations, and guest management.",
-          "Technical support.",
-          "Guiding delegates and exhibitors.",
-        ],
-        description: [
-          "University students and young professionals.",
-          "AI and tech enthusiasts looking for networking opportunities.",
-          "Individuals passionate about event management.",
-        ],
-      ),
-    ];
   }
 
   @override
@@ -85,7 +85,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 20,
-            key: PageStorageKey("registration_page"),
+            key: const PageStorageKey("registration_page"),
             children: <Widget>[
               AnimatedContainer(
                 clipBehavior: Clip.hardEdge,
