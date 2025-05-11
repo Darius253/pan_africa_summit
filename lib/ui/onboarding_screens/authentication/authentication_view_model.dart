@@ -22,6 +22,7 @@ class AuthenticationViewModel extends ChangeNotifier {
       _isSignedIn = true;
     } catch (e) {
       _errorMessage = e.toString();
+      _isSignedIn = false;
     } finally {
       _setLoading(false);
       notifyListeners();
