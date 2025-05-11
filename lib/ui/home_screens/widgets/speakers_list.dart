@@ -35,7 +35,6 @@ class _SpeakersListState extends State<SpeakersList> {
   @override
   void initState() {
     super.initState();
-
     _scrollController.addListener(_loadMoreItems);
   }
 
@@ -49,6 +48,7 @@ class _SpeakersListState extends State<SpeakersList> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GridView.builder(
+      key: const PageStorageKey<String>("speakers"),
       physics: const AlwaysScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 1,
