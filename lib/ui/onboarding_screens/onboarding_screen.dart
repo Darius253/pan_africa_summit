@@ -13,7 +13,23 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  List<Widget> _onboardingItems = [];
+  late final List<Widget> _onboardingItems = [
+    const OnBoardingItem(
+      imagePath: "assets/images/onboarding_1.jpg",
+      text:
+          "Hear from renowned experts and visionaries as they share their insights on the transformative potential of AI in Africa.",
+    ),
+    const OnBoardingItem(
+      imagePath: "assets/images/onboarding_2.jpg",
+      text:
+          "Engage in thought-provoking dialogues on the challenges, opportunities, and ethical considerations surrounding the deployment of AI technologies.",
+    ),
+    const OnBoardingItem(
+      imagePath: "assets/images/onboarding_3.jpg",
+      text:
+          "Connect with a diverse community of AI enthusiasts, policymakers, entrepreneurs, and researchers, fostering valuable partnerships and collaborations.",
+    ),
+  ];
 
   final PageController pageController = PageController(
     initialPage: 0,
@@ -24,23 +40,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   void initState() {
     super.initState();
-    _onboardingItems = [
-      const OnBoardingItem(
-        imagePath: "assets/images/onboarding_1.jpg",
-        text:
-            "Hear from renowned experts and visionaries as they share their insights on the transformative potential of AI in Africa.",
-      ),
-      const OnBoardingItem(
-        imagePath: "assets/images/onboarding_2.jpg",
-        text:
-            "Engage in thought-provoking dialogues on the challenges, opportunities, and ethical considerations surrounding the deployment of AI technologies.",
-      ),
-      const OnBoardingItem(
-        imagePath: "assets/images/onboarding_3.jpg",
-        text:
-            "Connect with a diverse community of AI enthusiasts, policymakers, entrepreneurs, and researchers, fostering valuable partnerships and collaborations.",
-      ),
-    ];
   }
 
   @override
