@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/firebase_options.dart';
 import 'package:pan_african_ai_summit/theme.dart';
 import 'package:pan_african_ai_summit/util.dart';
-import 'package:pan_african_ai_summit/wrapper.dart';
+import 'package:pan_african_ai_summit/ui/wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
