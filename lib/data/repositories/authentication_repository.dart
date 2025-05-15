@@ -19,12 +19,28 @@ class AuthenticationRepository {
 
       // Once signed in, return the UserCredential
       return await FirebaseAuth.instance.signInWithCredential(credential);
-    } on PlatformException catch (e) {
-      return Future.error('Google Sign-in failed: ${e.message}');
-    } on FirebaseAuthException catch (e) {
-      return Future.error('Google Sign-in failed: ${e.message}');
     } catch (e) {
-      return Future.error('Google Sign-in failed: ${e.toString()}');
+      if (e is PlatformException && e.code == 'sign_in_canceled') {
+        return Future.error('Sign-in canceled');
+      } else if (e is FirebaseAuthException) {
+        switch (e.code) {
+          case 'account-exists-with-different-credential':
+            return Future.error(
+              'This email is already associated with another account',
+            );
+          case 'invalid-credential':
+            return Future.error('Unable to sign in. Please try again');
+          case 'user-disabled':
+            return Future.error('This account has been disabled');
+          case 'operation-not-allowed':
+          case 'user-not-found':
+          case 'wrong-password':
+          default:
+            return Future.error('Authentication failed. Please try again.');
+        }
+      }
+      // Generic error for all other cases
+      return Future.error('Unable to sign in. Please try again later.');
     }
   }
 
