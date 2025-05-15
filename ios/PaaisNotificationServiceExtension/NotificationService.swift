@@ -11,7 +11,12 @@ import awesome_notifications_fcm
 @available(iOS 10.0, *)
 class NotificationService: DartAwesomeServiceExtension {
 
-    // var contentHandler: ((UNNotificationContent) -> Void)?
+   
+
+}
+
+
+// var contentHandler: ((UNNotificationContent) -> Void)?
     // var bestAttemptContent: UNMutableNotificationContent?
 
     // override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
@@ -33,5 +38,3 @@ class NotificationService: DartAwesomeServiceExtension {
     //         contentHandler(bestAttemptContent)
     //     }
     // }
-
-}
