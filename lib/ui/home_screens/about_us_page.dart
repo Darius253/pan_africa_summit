@@ -79,21 +79,24 @@ class _AboutUsPageState extends State<AboutUsPage> {
               children: [
                 SizedBox(height: 20),
                 _buildAboutUsTile(
-                  theme,
-                  "About Us",
-                  "Welcome to the Pan African AI Summit, the premier platform dedicated to fostering innovation, collaboration, and growth within the AI ecosystem across the African continent. Our summit is an annual gathering of visionaries, industry leaders, researchers, and enthusiasts who are passionate about the transformative power of Artificial Intelligence and its potential to drive socio-economic development in Africa.",
+                  theme: theme,
+                  header: "About Us",
+                  body:
+                      "Welcome to the Pan African AI Summit, the premier platform dedicated to fostering innovation, collaboration, and growth within the AI ecosystem across the African continent. Our summit is an annual gathering of visionaries, industry leaders, researchers, and enthusiasts who are passionate about the transformative power of Artificial Intelligence and its potential to drive socio-economic development in Africa.",
                 ),
 
                 _buildAboutUsTile(
-                  theme,
-                  "Who Are We?",
-                  "We are a dynamic team of AI specialists and thought leaders in the UK, Europe, & Africa committed to advancing the AI frontier in the African continent and beyond. With years of experience in technology training and event management, our mission is to create an inclusive and engaging environment where diverse voices can converge to share knowledge, inspire innovation, and forge meaningful partnerships.",
+                  theme: theme,
+                  header: "Who Are We?",
+                  body:
+                      "We are a dynamic team of AI specialists and thought leaders in the UK, Europe, & Africa committed to advancing the AI frontier in the African continent and beyond. With years of experience in technology training and event management, our mission is to create an inclusive and engaging environment where diverse voices can converge to share knowledge, inspire innovation, and forge meaningful partnerships.",
                 ),
 
                 _buildAboutUsTile(
-                  theme,
-                  "What We Do",
-                  "At the Pan African AI Summit, we curate a unique blend of keynote presentations, panel discussions, hands-on workshops, and networking opportunities, all designed to provide valuable insights and foster collaboration. Our events showcase cutting-edge AI research, innovative projects, and practical applications that address the unique challenges and opportunities within the African context.",
+                  theme: theme,
+                  header: "What We Do",
+                  body:
+                      "At the Pan African AI Summit, we curate a unique blend of keynote presentations, panel discussions, hands-on workshops, and networking opportunities, all designed to provide valuable insights and foster collaboration. Our events showcase cutting-edge AI research, innovative projects, and practical applications that address the unique challenges and opportunities within the African context.",
                 ),
               ],
             ),
@@ -104,7 +107,11 @@ class _AboutUsPageState extends State<AboutUsPage> {
   }
 }
 
-Widget _buildAboutUsTile(ThemeData theme, String header, String body) {
+Widget _buildAboutUsTile({
+  required ThemeData theme,
+  required String header,
+  required String body,
+}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20.0),
     child: Column(
