@@ -89,6 +89,7 @@ class _MainPageState extends State<MainPage>
             ),
           ),
         ),
+
         SizedBox(
           height: 600,
           child: ListView.separated(
@@ -98,6 +99,7 @@ class _MainPageState extends State<MainPage>
             itemBuilder: (context, index) => _items[index],
           ),
         ),
+
         const SizedBox(height: 20),
       ],
     );
