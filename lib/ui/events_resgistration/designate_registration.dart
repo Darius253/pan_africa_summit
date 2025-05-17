@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/designate_registration/contact_information.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/designate_registration/personal_information.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/designate_registration/travel_information.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/succesful_registration_page.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
+import 'package:pan_african_ai_summit/ui/home_screens/widgets/system_alerts.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/nav_button.dart';
 
 class DesignateRegisteration extends StatefulWidget {
@@ -101,6 +103,7 @@ class _DesignateRegisterationState extends State<DesignateRegisteration> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Padding(
@@ -166,10 +169,25 @@ class _DesignateRegisterationState extends State<DesignateRegisteration> {
                     else
                       PrimaryButton(
                         onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (contex) => const SuccesfulRegistrationPage(),
+                            ),
+                          );
+
                           CustomSnackBar.show(
                             context,
                             'Registration Complete successfully.',
                             isError: false,
+                          );
+                          sendNotification(
+                            context: context,
+                            title: "PAAIS",
+                            body:
+                                "You are attending the PAAIS Summit on 25th October, 2025",
+                            theme: theme,
                           );
                         },
                         text: "Complete",
