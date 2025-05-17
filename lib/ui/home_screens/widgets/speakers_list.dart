@@ -64,20 +64,19 @@ class _SpeakersListState extends State<SpeakersList> {
           );
         } else {
           return _buildSpeakersCard(
-            theme,
-            null,
-            "${_speakerInfo["name"]!} $index",
-            "${_speakerInfo["bio"]!} $index",
-            () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (context) => AboutSpeakerPage(heroTag: "speaker$index"),
+            theme: theme,
+            imageUrl: null,
+            name: "${_speakerInfo["name"]!} $index",
+            bio: "${_speakerInfo["bio"]!} $index",
+            onPressed:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) => AboutSpeakerPage(heroTag: "speaker$index"),
+                  ),
                 ),
-              );
-            },
-            "speaker$index",
+            heroTag: "speaker$index",
           );
         }
       },
@@ -88,14 +87,14 @@ class _SpeakersListState extends State<SpeakersList> {
   }
 }
 
-Widget _buildSpeakersCard(
-  ThemeData theme,
-  String? imageUrl,
-  String name,
-  String bio,
-  Function()? onPressed,
-  String heroTag,
-) {
+Widget _buildSpeakersCard({
+  required ThemeData theme,
+  required String? imageUrl,
+  required String name,
+  required String bio,
+  required Function()? onPressed,
+  required String heroTag,
+}) {
   return Container(
     padding: const EdgeInsets.all(10),
     decoration: BoxDecoration(
