@@ -56,10 +56,11 @@ class EventsPage extends StatelessWidget {
               physics: const AlwaysScrollableScrollPhysics(),
               itemBuilder: (_, index) {
                 return _buildAgendaTile(
-                  theme,
-                  "Registration and Networking",
-                  "8:00AM - 10:00 AM",
-                  "Join us for an insightful session on the impact of AI in the finance sector. Learn from industry experts and discover the latest trends and technologies.",
+                  theme: theme,
+                  agenda: "Registration and Networking",
+                  time: "8:00AM - 10:00 AM",
+                  description:
+                      "Join us for an insightful session on the impact of AI in the finance sector. Learn from industry experts and discover the latest trends and technologies.",
                 );
               },
               itemCount: 10,
@@ -70,7 +71,7 @@ class EventsPage extends StatelessWidget {
           AnimatedListTile(
             text: "View Speakers",
             isAgenda: false,
-            child: SpeakersList()
+            child: SpeakersList(),
           ),
         ],
       ),
@@ -78,12 +79,12 @@ class EventsPage extends StatelessWidget {
   }
 }
 
-Widget _buildAgendaTile(
-  ThemeData theme,
-  String agenda,
-  String time,
-  String description,
-) {
+Widget _buildAgendaTile({
+  required ThemeData theme,
+  required String agenda,
+  required String time,
+  required String description,
+}) {
   return ListTile(
     contentPadding: const EdgeInsets.all(0),
     title: Text(
