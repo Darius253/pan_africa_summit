@@ -86,7 +86,6 @@ Future<bool> sendNotification({
           onPressed: () {
             AwesomeNotifications().requestPermissionToSendNotifications();
             Navigator.pop(context);
-             Navigator.pop(context);
           },
         );
       }
