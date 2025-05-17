@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
 import 'package:pan_african_ai_summit/ui/home_screens/about_us_page.dart';
+import 'package:pan_african_ai_summit/ui/home_screens/widgets/system_alerts.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/authentication/authentication_view_model.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/onboarding_screen.dart';
 import 'package:pan_african_ai_summit/ui/utils/loading.dart';
@@ -36,81 +37,94 @@ class SettingsPage extends StatelessWidget {
             children: [
               //About Us
               _buildSettingsTile(
-                theme,
-                "About Us",
-                "About the Pan-African AI Summit",
-                Icons.info,
-                theme.colorScheme.onSurface,
-                () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AboutUsPage()),
-                ),
-                null,
+                theme: theme,
+                title: "About Us",
+                subtitle: "About the Pan-African AI Summit",
+                icon: Icons.info,
+                color: theme.colorScheme.onSurface,
+                onTap:
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AboutUsPage()),
+                    ),
               ),
 
               //Privacy Policy
               _buildSettingsTile(
-                theme,
-                "Privacy Policy",
-                "Read our privacy policy",
-                Icons.privacy_tip,
-                theme.colorScheme.onSurface,
-                () {
+                theme: theme,
+                title: "Privacy Policy",
+                subtitle: "Read our privacy policy",
+                icon: Icons.privacy_tip,
+                color: theme.colorScheme.onSurface,
+                onTap: () {
                   // Handle privacy policy action
                 },
-                null,
               ),
 
               //Contact Developer
               _buildSettingsTile(
-                theme,
-                "Contact Developer",
-                "",
-                Icons.contact_mail,
-                theme.colorScheme.onSurface,
-                () {
+                theme: theme,
+                title: "Contact Developer",
+                subtitle: "",
+                icon: Icons.contact_mail,
+                color: theme.colorScheme.onSurface,
+                onTap: () {
                   _showContactDevelopeBottomrSheet(context, theme);
                 },
-                null,
               ),
               _buildSettingsTile(
-                theme,
-                "Email Us",
-                "Get in touch with us",
-                Icons.email,
-                theme.colorScheme.onSurface,
-                () {
-                  _launchUrl(
-                    "mailto:info@panafricanaisummit.com?subject=Enquiry%20About%20The%20Summit&body=Dear%20Team,",
-                  );
-                },
-                null,
+                theme: theme,
+                title: "Email Us",
+                subtitle: "Get in touch with us",
+                icon: Icons.email,
+                color: theme.colorScheme.onSurface,
+                onTap:
+                    () => _launchUrl(
+                      "mailto:info@panafricanaisummit.com?subject=Enquiry%20About%20The%20Summit&body=Dear%20Team,",
+                    ),
               ),
 
               _buildSettingsTile(
-                theme,
-                "Share App",
-                "Share the app with others",
-                Icons.adaptive.share,
-                theme.colorScheme.onSurface,
-                () {},
-                null,
+                theme: theme,
+                title: "Share App",
+                subtitle: "Share the app with others",
+                icon: Icons.adaptive.share,
+                color: theme.colorScheme.onSurface,
+                onTap: () {},
+              ),
+
+              _buildSettingsTile(
+                theme: theme,
+                title: "Push Notifications",
+                subtitle:
+                    "Allow push notifications to receive important updates",
+                icon: Icons.notifications_active,
+                color: theme.colorScheme.onSurface,
+                onTap: () {
+                  sendNotification(
+                    context: context,
+                    title: "PAAIS",
+                    body: "Push Notifications Enabled",
+                    theme: theme,
+                  );
+                },
               ),
 
               //Logout
               _buildSettingsTile(
-                theme,
-                "Logout",
-                "Logout from the app",
-                Icons.logout_sharp,
-                theme.colorScheme.error,
-                () {
-                  _alertPopUp(
-                    context,
-                    theme,
-                    "Logout?",
-                    "Are you sure you want to logout? You will need to login again to access your account.",
-                    () async {
+                theme: theme,
+                title: "Logout",
+                subtitle: "Logout from the app",
+                icon: Icons.logout_sharp,
+                color: theme.colorScheme.error,
+                onTap: () {
+                  AlertPopUp().showAlertPopUp(
+                    context: context,
+                    theme: theme,
+                    title: "Logout?",
+                    content:
+                        "Are you sure you want to logout? You will need to login again to access your account.",
+                    onPressed: () async {
                       await viewModal.signOut();
                       if (viewModal.isSignedOut) {
                         if (context.mounted) {
@@ -126,28 +140,28 @@ class SettingsPage extends StatelessWidget {
                     },
                   );
                 },
-                null,
               ),
 
               //Delete Account
               _buildSettingsTile(
-                theme,
-                "Delete Account",
-                "Remove your account from our system",
-                Icons.delete,
-                theme.colorScheme.error,
-                () {
-                  _alertPopUp(
-                    context,
-                    theme,
-                    "Delete Account?",
-                    "Are you sure you want to delete your account? This action cannot be undone.",
-                    () {
+                theme: theme,
+                title: "Delete Account",
+                subtitle: "Remove your account from our system",
+                icon: Icons.delete,
+                color: theme.colorScheme.error,
+                onTap: () {
+                  AlertPopUp().showAlertPopUp(
+                    context: context,
+                    theme: theme,
+                    title: "Delete Account?",
+                    content:
+                        "Are you sure you want to delete your account? This action cannot be undone.",
+
+                    onPressed: () {
                       // Handle delete account action
                     },
                   );
                 },
-                null,
               ),
             ],
           );
@@ -157,15 +171,15 @@ class SettingsPage extends StatelessWidget {
   }
 }
 
-Widget _buildSettingsTile(
-  ThemeData theme,
-  String title,
-  String subtitle,
-  IconData icon,
-  Color color,
+Widget _buildSettingsTile({
+  required ThemeData theme,
+  required String title,
+  required String subtitle,
+  required IconData? icon,
+  required Color color,
   Function()? onTap,
   Widget? trailing,
-) {
+}) {
   return ListTile(
     contentPadding: const EdgeInsets.all(0),
     title: Text(
@@ -216,17 +230,16 @@ Future<void> _showContactDevelopeBottomrSheet(
               spacing: 20,
               children: [
                 _buildSettingsTile(
-                  theme,
-                  "Contact via LinkedIn",
-                  "Connect on LinkedIn",
-                  Icons.link,
-                  theme.colorScheme.onSurface,
-                  () {
-                    _launchUrl(
-                      "https://www.linkedin.com/in/twumasi-ankrah-darius/",
-                    );
-                  },
-                  Image.asset(
+                  theme: theme,
+                  title: "Contact via LinkedIn",
+                  subtitle: "Connect on LinkedIn",
+                  icon: Icons.link,
+                  color: theme.colorScheme.onSurface,
+                  onTap:
+                      () => _launchUrl(
+                        "https://www.linkedin.com/in/twumasi-ankrah-darius/",
+                      ),
+                  trailing: Image.asset(
                     "assets/images/linkedin.png",
                     height: 30,
                     width: 30,
@@ -234,72 +247,19 @@ Future<void> _showContactDevelopeBottomrSheet(
                 ),
 
                 _buildSettingsTile(
-                  theme,
-                  "Contact via Email",
-                  "Email Developer",
-                  Icons.email,
-                  theme.colorScheme.onSurface,
-                  () {
-                    _launchUrl(
-                      "mailto:trondarius13@gmail.com?subject=Feedback&body=Dear%20Darius,",
-                    );
-                  },
-                  null,
+                  theme: theme,
+                  title: "Contact via Email",
+                  subtitle: "Email Developer",
+                  icon: Icons.email,
+                  color: theme.colorScheme.onSurface,
+                  onTap:
+                      () => _launchUrl(
+                        "mailto:trondarius13@gmail.com?subject=Feedback&body=Dear%20Darius,",
+                      ),
                 ),
               ],
             ),
           ),
-        ),
-  );
-}
-
-Future<void> _alertPopUp(
-  BuildContext context,
-  ThemeData theme,
-  String title,
-  String content,
-  Function() onPressed,
-) {
-  return showAdaptiveDialog(
-    context: context,
-    barrierColor: theme.colorScheme.primary.withValues(alpha: 0.5),
-    barrierDismissible: true,
-    builder:
-        (_) => AlertDialog.adaptive(
-          backgroundColor: theme.colorScheme.surface,
-          title: Text(
-            title,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: theme.colorScheme.error,
-            ),
-          ),
-          content: Text(
-            content,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: onPressed,
-              child: Text(
-                "Yes",
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.error,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(
-                "No",
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onSurface,
-                ),
-              ),
-            ),
-          ],
         ),
   );
 }
