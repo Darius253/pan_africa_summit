@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/succesful_registration_page.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/drop_down.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/text_field.dart';
+import 'package:pan_african_ai_summit/ui/home_screens/widgets/system_alerts.dart';
 
 class MediaRegistrationPage extends StatelessWidget {
   const MediaRegistrationPage({
@@ -35,6 +37,7 @@ class MediaRegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+    final theme = Theme.of(context);
     final List<String> mediaTypes = [
       "Print",
       "TV",
@@ -61,11 +64,11 @@ class MediaRegistrationPage extends StatelessWidget {
           controller: scrollController,
           scrollDirection: Axis.vertical,
           children: [
-           const Text(
+            const Text(
               "Media Pass Registration",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-             Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 10,
@@ -128,10 +131,23 @@ class MediaRegistrationPage extends StatelessWidget {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     // Handle form submission
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (contex) => const SuccesfulRegistrationPage(),
+                      ),
+                    );
                     CustomSnackBar.show(
                       context,
                       "Registration Completed Successfully",
                       isError: false,
+                    );
+                    sendNotification(
+                      context: context,
+                      title: "PAAIS",
+                      body:
+                          "You are attending the PAAIS Summit on 25th October, 2025",
+                      theme: theme,
                     );
                   } else {
                     CustomSnackBar.show(
