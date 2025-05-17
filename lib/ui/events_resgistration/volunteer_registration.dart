@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pan_african_ai_summit/ui/events_resgistration/succesful_registration_page.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/drop_down.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/text_field.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/travel_info_with_radio_buttons.dart';
+import 'package:pan_african_ai_summit/ui/home_screens/widgets/system_alerts.dart';
 
 class VolunteerRegistrationPage extends StatelessWidget {
   const VolunteerRegistrationPage({
@@ -32,6 +34,7 @@ class VolunteerRegistrationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final formKey = GlobalKey<FormState>();
     final List<String> areasOfInterest = [
       "Print",
@@ -114,10 +117,24 @@ class VolunteerRegistrationPage extends StatelessWidget {
                     // showLoadingDialog(context);
                     // Handle form submission
 
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (contex) => const SuccesfulRegistrationPage(),
+                      ),
+                    );
+
                     CustomSnackBar.show(
                       context,
                       "Registration Completed Successfully",
                       isError: false,
+                    );
+                    sendNotification(
+                      context: context,
+                      title: "PAAIS",
+                      body:
+                          "You are attending the PAAIS Summit on 25th October, 2025",
+                      theme: theme,
                     );
                   } else {
                     CustomSnackBar.show(
