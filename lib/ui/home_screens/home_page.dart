@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Color.fromRGBO(0, 14, 92, 0.5),
       extendBody: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actionsPadding: EdgeInsets.only(right: (10)),
         title: Image.asset(
           "assets/images/logo.png",
