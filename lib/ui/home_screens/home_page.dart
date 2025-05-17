@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/registration_page.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
@@ -23,7 +22,6 @@ class _HomePageState extends State<HomePage> {
     EventsPage(controller: _eventScrollcontroller),
     const SettingsPage(),
   ];
-  
 
   @override
   void dispose() {
@@ -109,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                       BottomNavigationBarItem(
                         icon:
                             _currentPage == 0
-                                ? _buildIconContainer(Icons.dashboard)
+                                ? _buildIconContainer(icon: Icons.dashboard)
                                 : const Icon(Icons.dashboard),
                         label: "",
                       ),
@@ -117,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                         icon:
                             _currentPage == 1
                                 ? _buildIconContainer(
-                                  Icons.calendar_month_rounded,
+                                  icon: Icons.calendar_month_rounded,
                                 )
                                 : const Icon(Icons.calendar_month_rounded),
                         label: "",
@@ -125,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                       BottomNavigationBarItem(
                         icon:
                             _currentPage == 2
-                                ? _buildIconContainer(Icons.settings)
+                                ? _buildIconContainer(icon: Icons.settings)
                                 : const Icon(Icons.settings),
                         label: "",
                       ),
@@ -141,7 +139,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget _buildIconContainer(IconData icon) {
+Widget _buildIconContainer({required IconData icon}) {
   return Container(
     decoration: BoxDecoration(color: Color(0xffF561FA), shape: BoxShape.circle),
     alignment: Alignment.center,
