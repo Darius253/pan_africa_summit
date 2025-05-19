@@ -5,7 +5,7 @@ import 'package:pan_african_ai_summit/ui/events_resgistration/designate_registra
 import 'package:pan_african_ai_summit/ui/events_resgistration/succesful_registration_page.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
-import 'package:pan_african_ai_summit/ui/home_screens/widgets/system_alerts.dart';
+import 'package:pan_african_ai_summit/ui/utils/system_alerts.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/widgets/nav_button.dart';
 
 class DesignateRegisteration extends StatefulWidget {
@@ -24,6 +24,8 @@ class _DesignateRegisterationState extends State<DesignateRegisteration> {
   List<Widget> _dpages = [];
   String? _selectedSector;
   String? _selectedGender;
+  final systemAlerts  =  SystemAlerts();
+
 
   final _formKey = GlobalKey<FormState>();
 
@@ -182,7 +184,7 @@ class _DesignateRegisterationState extends State<DesignateRegisteration> {
                             'Registration Complete successfully.',
                             isError: false,
                           );
-                          sendNotification(
+                         systemAlerts.sendNotification(
                             context: context,
                             title: "PAAIS",
                             body:
