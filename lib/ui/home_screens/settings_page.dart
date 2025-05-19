@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
 import 'package:pan_african_ai_summit/ui/home_screens/about_us_page.dart';
-import 'package:pan_african_ai_summit/ui/home_screens/widgets/system_alerts.dart';
+import 'package:pan_african_ai_summit/ui/utils/system_alerts.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/authentication/authentication_view_model.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/onboarding_screen.dart';
 import 'package:pan_african_ai_summit/ui/utils/loading.dart';
@@ -14,6 +14,8 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final AuthenticationViewModel viewModal = AuthenticationViewModel();
+    final SystemAlerts systemAlerts = SystemAlerts();
+    final id = DateTime.now().millisecondsSinceEpoch % 100000;
 
     return Scaffold(
       body: ListenableBuilder(
@@ -101,7 +103,7 @@ class SettingsPage extends StatelessWidget {
                 icon: Icons.notifications_active,
                 color: theme.colorScheme.onSurface,
                 onTap: () {
-                  sendNotification(
+                  systemAlerts.sendNotification(
                     context: context,
                     title: "PAAIS",
                     body: "Push Notifications Enabled",
@@ -118,7 +120,7 @@ class SettingsPage extends StatelessWidget {
                 icon: Icons.logout_sharp,
                 color: theme.colorScheme.error,
                 onTap: () {
-                  AlertPopUp().showAlertPopUp(
+                  systemAlerts.showAlertPopUp(
                     context: context,
                     theme: theme,
                     title: "Logout?",
@@ -139,6 +141,7 @@ class SettingsPage extends StatelessWidget {
                       }
                     },
                   );
+                  systemAlerts.cancelNotification(id);
                 },
               ),
 
@@ -150,7 +153,7 @@ class SettingsPage extends StatelessWidget {
                 icon: Icons.delete,
                 color: theme.colorScheme.error,
                 onTap: () {
-                  AlertPopUp().showAlertPopUp(
+                  systemAlerts.showAlertPopUp(
                     context: context,
                     theme: theme,
                     title: "Delete Account?",
@@ -158,7 +161,7 @@ class SettingsPage extends StatelessWidget {
                         "Are you sure you want to delete your account? This action cannot be undone.",
 
                     onPressed: () {
-                      // Handle delete account action
+                      systemAlerts.cancelNotification(id);
                     },
                   );
                 },
