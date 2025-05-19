@@ -5,7 +5,7 @@ import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_bu
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/text_field.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/travel_info_with_radio_buttons.dart';
-import 'package:pan_african_ai_summit/ui/home_screens/widgets/system_alerts.dart';
+import 'package:pan_african_ai_summit/ui/utils/system_alerts.dart';
 
 class VolunteerRegistrationPage extends StatelessWidget {
   const VolunteerRegistrationPage({
@@ -20,6 +20,7 @@ class VolunteerRegistrationPage extends StatelessWidget {
     required this.mobileNumberController,
     required this.onAreasOfInterestChanged,
     this.selectedAreasOfInterest,
+    required this.systemAlerts,
   });
 
   final TextEditingController firstNameController;
@@ -31,6 +32,8 @@ class VolunteerRegistrationPage extends StatelessWidget {
   final ScrollController scrollController;
   final Function(String?) onAreasOfInterestChanged;
   final String? selectedAreasOfInterest;
+  final SystemAlerts systemAlerts;
+
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +132,7 @@ class VolunteerRegistrationPage extends StatelessWidget {
                       "Registration Completed Successfully",
                       isError: false,
                     );
-                    sendNotification(
+                   systemAlerts.sendNotification(
                       context: context,
                       title: "PAAIS",
                       body:
