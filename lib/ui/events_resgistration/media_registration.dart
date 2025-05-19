@@ -4,7 +4,7 @@ import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/drop_down.
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/text_field.dart';
-import 'package:pan_african_ai_summit/ui/home_screens/widgets/system_alerts.dart';
+import 'package:pan_african_ai_summit/ui/utils/system_alerts.dart';
 
 class MediaRegistrationPage extends StatelessWidget {
   const MediaRegistrationPage({
@@ -21,6 +21,7 @@ class MediaRegistrationPage extends StatelessWidget {
     required this.onCoverageTypeChanged,
     this.selectedMediaType,
     this.selectedCoverageType,
+    required this.systemAlerts,
   });
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
@@ -33,6 +34,7 @@ class MediaRegistrationPage extends StatelessWidget {
   final Function(String?) onCoverageTypeChanged;
   final String? selectedMediaType;
   final String? selectedCoverageType;
+  final SystemAlerts systemAlerts;
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +144,7 @@ class MediaRegistrationPage extends StatelessWidget {
                       "Registration Completed Successfully",
                       isError: false,
                     );
-                    sendNotification(
+                    systemAlerts.sendNotification(
                       context: context,
                       title: "PAAIS",
                       body:
