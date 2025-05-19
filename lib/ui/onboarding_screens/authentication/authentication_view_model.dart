@@ -33,6 +33,7 @@ class AuthenticationViewModel extends ChangeNotifier {
     _setLoading(true);
     try {
       await _authRepo.signOut();
+
       _isSignedOut = true;
       _isSignedIn = false;
       _errorMessage = null;
