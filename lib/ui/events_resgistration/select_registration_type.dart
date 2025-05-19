@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/designate_registration.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/media_registration.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/volunteer_registration.dart';
+import 'package:pan_african_ai_summit/ui/utils/system_alerts.dart';
 
 class SelectRegistrationType extends StatefulWidget {
   const SelectRegistrationType({super.key});
@@ -39,6 +40,7 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
   //Volunteer Registration Controllers
   final _vscrollController = ScrollController();
   String? _selectedAreasOfInterest;
+  final systemAlerts = SystemAlerts();
 
   @override
   void initState() {
@@ -65,6 +67,7 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
         },
         selectedMediaType: _selectedMediaType,
         selectedCoverageType: _selectedCoverageType,
+        systemAlerts: systemAlerts,
       ),
       VolunteerRegistrationPage(
         scrollController: _vscrollController,
@@ -80,6 +83,7 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
           });
         },
         selectedAreasOfInterest: _selectedAreasOfInterest,
+        systemAlerts: systemAlerts,
       ),
     ];
   }
@@ -152,7 +156,7 @@ class _SelectRegistrationTypeState extends State<SelectRegistrationType> {
         key: PageStorageKey("registration_page"),
         controller: _pageController,
         children: _pages,
-      
+
         onPageChanged: (index) {
           setState(() {
             _currentIndex = index;
