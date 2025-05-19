@@ -3,7 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
 import 'package:pan_african_ai_summit/ui/home_screens/home_page.dart';
-import 'package:pan_african_ai_summit/ui/home_screens/widgets/system_alerts.dart';
+import 'package:pan_african_ai_summit/ui/utils/system_alerts.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/authentication/authentication_view_model.dart';
 import 'package:pan_african_ai_summit/ui/utils/loading.dart';
 
@@ -16,6 +16,7 @@ class AuthenticationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final theme = Theme.of(context);
+    final systemAlerts = SystemAlerts();
     return Scaffold(
       body: Stack(
         children: [
@@ -66,7 +67,7 @@ class AuthenticationPage extends StatelessWidget {
                                 context,
                                 "Sign In Successful",
                               );
-                              sendNotification(
+                              systemAlerts.sendNotification(
                                 context: context,
                                 title: "PAAIS",
                                 body: "Welcome to Pan African AI Summit",
