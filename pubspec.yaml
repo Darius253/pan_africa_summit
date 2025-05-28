@@ -46,6 +46,9 @@ dependencies:
   awesome_notifications: ^0.10.1
   firebase_crashlytics: ^4.3.5
   confetti: ^0.8.0
+  http: ^1.4.0
+  html: ^0.15.6
+  html_unescape: ^2.0.0
 
 
 dev_dependencies:
