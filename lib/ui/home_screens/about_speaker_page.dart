@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/utils/gradient_text.dart';
 
 class AboutSpeakerPage extends StatelessWidget {
-  const AboutSpeakerPage({super.key, required this.heroTag});
+  const AboutSpeakerPage({
+    super.key,
+    required this.heroTag,
+    required this.imageUrl,
+    required this.speakerName,
+    required this.bio,
+  });
   final String heroTag;
+  final String imageUrl;
+  final String speakerName;
+  final String bio;
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +51,7 @@ class AboutSpeakerPage extends StatelessWidget {
                   tag: heroTag,
                   child: CircleAvatar(
                     radius: 70,
-                    foregroundImage: AssetImage(
-                      "assets/images/background.webp",
-                    ),
+                    foregroundImage: NetworkImage(imageUrl),
                   ),
                 ),
               ),
@@ -55,7 +62,8 @@ class AboutSpeakerPage extends StatelessWidget {
                   spacing: 5,
                   children: [
                     GradientText(
-                      text: "Speaker Name",
+                      text: speakerName,
+                      textAlign: TextAlign.start,
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -64,10 +72,9 @@ class AboutSpeakerPage extends StatelessWidget {
                       ),
                     ),
 
-                    Text(
-                      "Founder & CEO at DecisiveAI",
-                      style: theme.textTheme.bodyLarge?.copyWith(),
-                    ),
+                    Text(bio, style: theme.textTheme.bodyLarge?.copyWith(
+                     
+                    )),
                   ],
                 ),
               ),
