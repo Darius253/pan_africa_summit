@@ -5,11 +5,13 @@ class GradientText extends StatelessWidget {
     super.key,
     required this.text,
     this.style,
+    this.textAlign,
     required this.gradient,
   });
   final String text;
   final TextStyle? style;
   final Gradient gradient;
+  final TextAlign? textAlign;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -26,6 +28,7 @@ class GradientText extends StatelessWidget {
             theme.textTheme.headlineLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
+        textAlign: textAlign,
       ),
     );
   }
