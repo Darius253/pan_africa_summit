@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pan_african_ai_summit/data/models/speaker_model.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
 import 'package:pan_african_ai_summit/ui/home_screens/about_speaker_page.dart';
+import 'package:pan_african_ai_summit/ui/home_screens/events_page/events_view_model.dart';
 import 'package:pan_african_ai_summit/ui/utils/gradient_text.dart';
 
 class SpeakersList extends StatefulWidget {
@@ -10,32 +12,26 @@ class SpeakersList extends StatefulWidget {
   State<SpeakersList> createState() => _SpeakersListState();
 }
 
-class _SpeakersListState extends State<SpeakersList> {
+class _SpeakersListState extends State<SpeakersList>
+    with AutomaticKeepAliveClientMixin {
   final _scrollController = ScrollController();
-
-  final Map<String, String> _speakerInfo = {
-    "name": "Speaker Name",
-    "bio":
-        "Founder & CEO at DecisiveAI – Former Minister of Digital Transition and Administrative Reform of Morocco",
-  };
-
-  final List _speakers = List.generate(20, (index) => '$index');
-
-  void _loadMoreItems() async {
-    if (_scrollController.position.pixels ==
-        _scrollController.position.maxScrollExtent) {
-      // Load more items here
-      await Future.delayed(const Duration(seconds: 3));
-      setState(() {
-        _speakers.addAll(List.generate(20, (index) => '$index'));
-      });
-    }
-  }
+  final _viewModel = EventsViewModel();
+  List<SpeakerModel> _speakers = [];
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_loadMoreItems);
+    _loadSpeakers();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
+  void _loadSpeakers() async {
+    final speakers = await _viewModel.fetchSpeakers();
+    setState(() {
+      _speakers = speakers;
+    });
   }
 
   @override
@@ -46,43 +42,54 @@ class _SpeakersListState extends State<SpeakersList> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final theme = Theme.of(context);
-    return GridView.builder(
-      key: const PageStorageKey<String>("speakers"),
-      physics: const AlwaysScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 1,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        mainAxisExtent: 300,
-      ),
-      itemBuilder: (_, index) {
-        if (index == _speakers.length) {
-          return const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Center(child: CircularProgressIndicator()),
-          );
-        } else {
-          return _buildSpeakersCard(
-            theme: theme,
-            imageUrl: null,
-            name: "${_speakerInfo["name"]!} $index",
-            bio: "${_speakerInfo["bio"]!} $index",
-            onPressed:
-                () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) => AboutSpeakerPage(heroTag: "speaker$index"),
-                  ),
-                ),
-            heroTag: "speaker$index",
-          );
+    return ListenableBuilder(
+      listenable: _viewModel,
+      builder: (context, _) {
+        if (_viewModel.isLoading) {
+          return const Center(child: CircularProgressIndicator());
         }
+        if (_speakers.isEmpty) {
+          return const Center(child: Text("No speakers available"));
+        }
+        return GridView.builder(
+          key: const PageStorageKey<String>("speakers"),
+          physics: const AlwaysScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            mainAxisExtent: 300,
+          ),
+          itemBuilder: (_, index) {
+            return _buildSpeakersCard(
+              theme: theme,
+              imageUrl: _speakers[index].imageUrl,
+              name: _speakers[index].name,
+              bio: _speakers[index].bio,
+              onPressed:
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => AboutSpeakerPage(
+                            heroTag: "speaker$index",
+                            imageUrl: _speakers[index].imageUrl,
+                            speakerName: _speakers[index].name,
+                            bio: _speakers[index].bio,
+                          ),
+                    ),
+                  ),
+              heroTag: "speaker$index",
+            );
+          },
+
+          controller: _scrollController,
+          itemCount: _speakers.length,
+          shrinkWrap: true,
+        );
       },
-      controller: _scrollController,
-      itemCount: _speakers.length,
-      shrinkWrap: true,
     );
   }
 }
@@ -114,7 +121,11 @@ Widget _buildSpeakersCard({
       children: [
         Hero(
           tag: heroTag,
-          child: CircleAvatar(radius: 50, backgroundColor: Colors.amber),
+          child: CircleAvatar(
+            radius: 50,
+            backgroundColor: Colors.amber,
+            backgroundImage: NetworkImage("$imageUrl"),
+          ),
         ),
         GradientText(
           text: name,
@@ -122,6 +133,7 @@ Widget _buildSpeakersCard({
             color: theme.colorScheme.primary,
             fontWeight: FontWeight.bold,
           ),
+          textAlign: TextAlign.center,
           gradient: const LinearGradient(
             colors: [Color(0xff2987F2), Color(0xffF561FA)],
           ),
