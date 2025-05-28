@@ -1,38 +1,11 @@
 class SpeakerModel {
-  String? name;
-  String? imageUrl;
-  String? title;
-  String? description;
-  String? company;
-  String? link;
+  final String name;
+  final String imageUrl;
+  final String bio; // This field will store the speaker's description/bio
 
   SpeakerModel({
-    this.name,
-    this.imageUrl,
-    this.description,
-    this.title,
-    this.company,
-    this.link,
+    required this.name,
+    required this.imageUrl,
+    required this.bio,
   });
-
-  factory SpeakerModel.fromJson(Map<String, dynamic> json) {
-    return SpeakerModel(
-      name: json['name'] as String?,
-      imageUrl: json['imageUrl'] as String?,
-      description: json['description'] as String?,
-      title: json['title'] as String?,
-      company: json['company'] as String?,
-      link: json['link'] as String?,
-    );
-  }
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'imageUrl': imageUrl,
-      'description': description,
-      'title': title,
-      'company': company,
-      'link': link,
-    };
-  }
 }
