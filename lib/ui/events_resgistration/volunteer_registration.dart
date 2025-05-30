@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/succesful_registration_page.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/drop_down.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/primary_button.dart';
-import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
+import 'package:pan_african_ai_summit/ui/utils/snack_bar.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/text_field.dart';
 import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/travel_info_with_radio_buttons.dart';
 import 'package:pan_african_ai_summit/ui/utils/system_alerts.dart';
