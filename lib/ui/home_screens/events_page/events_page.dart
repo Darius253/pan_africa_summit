@@ -5,14 +5,27 @@ import 'package:pan_african_ai_summit/ui/home_screens/widgets/animated_list_even
 import 'package:pan_african_ai_summit/ui/home_screens/widgets/speakers_list.dart';
 import 'package:pan_african_ai_summit/ui/utils/gradient_text.dart';
 
-class EventsPage extends StatelessWidget {
+class EventsPage extends StatefulWidget {
   const EventsPage({super.key, required this.controller});
   final ScrollController controller;
 
   @override
+  State<EventsPage> createState() => _EventsPageState();
+}
+
+class _EventsPageState extends State<EventsPage> {
+  late final SpeakersViewModel viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = SpeakersViewModel();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final viewModel = SpeakersViewModel();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -22,7 +35,7 @@ class EventsPage extends StatelessWidget {
         child: ListView(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          controller: controller,
+          controller: widget.controller,
           children: [
             const GradientText(
               text: "Meet the Visionaries Shaping Africa's AI Future",
