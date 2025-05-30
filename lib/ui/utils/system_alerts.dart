@@ -82,9 +82,11 @@ class SystemAlerts {
             color: theme.colorScheme.primary,
             confirmText: "Allow",
             cancelText: "Not Now",
-            onPressed: () {
-              AwesomeNotifications().requestPermissionToSendNotifications();
+            onPressed: () async {
               Navigator.pop(context);
+              await Future.delayed(const Duration(milliseconds: 100));
+              await AwesomeNotifications()
+                  .requestPermissionToSendNotifications();
             },
           );
         }
