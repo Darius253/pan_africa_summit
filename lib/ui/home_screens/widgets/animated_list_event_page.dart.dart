@@ -78,10 +78,8 @@ class _AnimatedListTileState extends State<AnimatedListTile>
         if (widget.isAgenda && isRotated) widget.eventDays ?? const SizedBox(),
 
         if (!widget.isAgenda && isRotated)
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
-            height: isRotated ? 80 : 0,
+          Visibility(
+            visible: isRotated,
             child: _buildSearchField(
               context: context,
               searchController: _searchController,
@@ -159,7 +157,7 @@ TextField _buildSearchField({
         bottom: 25.0,
         top: 0,
       ),
-      suffix:
+      suffixIcon:
           searchController.text.isNotEmpty
               ? IconButton(
                 padding: EdgeInsets.zero,
