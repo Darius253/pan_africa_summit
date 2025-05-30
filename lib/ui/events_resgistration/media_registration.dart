@@ -36,9 +36,11 @@ class MediaRegistrationPage extends StatelessWidget {
   final String? selectedCoverageType;
   final SystemAlerts systemAlerts;
 
+   static final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
+   
     final theme = Theme.of(context);
     final List<String> mediaTypes = [
       "Print",
@@ -108,7 +110,7 @@ class MediaRegistrationPage extends StatelessWidget {
               controller: organisationController,
             ),
             TextFields(
-              labelText: "Delgation",
+              labelText: "Delegation",
               controller: designationController,
             ),
             CustomDropdown(
