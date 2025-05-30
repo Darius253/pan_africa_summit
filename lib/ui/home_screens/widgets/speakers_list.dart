@@ -19,15 +19,13 @@ class _SpeakersListState extends State<SpeakersList>
   @override
   void initState() {
     super.initState();
-    _loadSpeakers();
+    if (!widget.viewModel.isLoading && widget.viewModel.speakers.isEmpty) {
+      widget.viewModel.fetchSpeakers();
+    }
   }
 
   @override
   bool get wantKeepAlive => true;
-
-  void _loadSpeakers() async {
-    await widget.viewModel.fetchSpeakers();
-  }
 
   @override
   void dispose() {
@@ -49,6 +47,10 @@ class _SpeakersListState extends State<SpeakersList>
             widget.viewModel.filteredSpeakers.isEmpty) {
           return const Center(child: Text("No speakers available"));
         }
+        final speakersToShow =
+            widget.viewModel.filteredSpeakers.isNotEmpty
+                ? widget.viewModel.filteredSpeakers
+                : widget.viewModel.speakers;
 
         return GridView.builder(
           key: const PageStorageKey<String>("speakers"),
@@ -59,69 +61,33 @@ class _SpeakersListState extends State<SpeakersList>
             crossAxisSpacing: 10,
             mainAxisExtent: 300,
           ),
+
           itemBuilder: (_, index) {
-            return widget.viewModel.filteredSpeakers.isNotEmpty
-                ? _buildSpeakersCard(
-                  theme: theme,
-                  imageUrl: widget.viewModel.filteredSpeakers[index].imageUrl,
-                  name: widget.viewModel.filteredSpeakers[index].name,
-                  bio: widget.viewModel.filteredSpeakers[index].bio,
-                  onPressed:
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => AboutSpeakerPage(
-                                heroTag: "speaker$index",
-                                imageUrl:
-                                    widget
-                                        .viewModel
-                                        .filteredSpeakers[index]
-                                        .imageUrl,
-                                speakerName:
-                                    widget
-                                        .viewModel
-                                        .filteredSpeakers[index]
-                                        .name,
-                                bio:
-                                    widget
-                                        .viewModel
-                                        .filteredSpeakers[index]
-                                        .bio,
-                              ),
-                        ),
-                      ),
-                  heroTag: "speaker$index",
-                )
-                : _buildSpeakersCard(
-                  theme: theme,
-                  imageUrl: widget.viewModel.speakers[index].imageUrl,
-                  name: widget.viewModel.speakers[index].name,
-                  bio: widget.viewModel.speakers[index].bio,
-                  onPressed:
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => AboutSpeakerPage(
-                                heroTag: "speaker$index",
-                                imageUrl:
-                                    widget.viewModel.speakers[index].imageUrl,
-                                speakerName:
-                                    widget.viewModel.speakers[index].name,
-                                bio: widget.viewModel.speakers[index].bio,
-                              ),
-                        ),
-                      ),
-                  heroTag: "speaker$index",
-                );
+            final speaker = speakersToShow[index];
+            return _buildSpeakersCard(
+              theme: theme,
+              imageUrl: speaker.imageUrl,
+              name: speaker.name,
+              bio: speaker.bio,
+              onPressed:
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => AboutSpeakerPage(
+                            heroTag: "speaker$index",
+                            imageUrl: speaker.imageUrl,
+                            speakerName: speaker.name,
+                            bio: speaker.bio,
+                          ),
+                    ),
+                  ),
+              heroTag: "speaker$index",
+            );
           },
 
           controller: _scrollController,
-          itemCount:
-              widget.viewModel.filteredSpeakers.isNotEmpty
-                  ? widget.viewModel.filteredSpeakers.length
-                  : widget.viewModel.speakers.length,
+          itemCount: speakersToShow.length,
           shrinkWrap: true,
         );
       },
