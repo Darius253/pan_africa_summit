@@ -8,7 +8,7 @@ class SpeakersRepository {
   try {
     return await speakersService.fetchSpeakers();
   } catch (e) {
-    return [];
+    rethrow;
   }
 }
 
