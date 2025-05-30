@@ -12,11 +12,13 @@ class AuthenticationPage extends StatelessWidget {
 
   final AuthenticationViewModel authenticationViewModel;
 
+  static final systemAlerts = SystemAlerts();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final theme = Theme.of(context);
-    final systemAlerts = SystemAlerts();
+
     return Scaffold(
       body: Stack(
         children: [
