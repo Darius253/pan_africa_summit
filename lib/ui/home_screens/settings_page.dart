@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pan_african_ai_summit/ui/events_resgistration/widgets/snack_bar.dart';
+import 'package:pan_african_ai_summit/ui/utils/snack_bar.dart';
 import 'package:pan_african_ai_summit/ui/home_screens/about_us_page.dart';
 import 'package:pan_african_ai_summit/ui/utils/system_alerts.dart';
 import 'package:pan_african_ai_summit/ui/onboarding_screens/authentication/authentication_view_model.dart';
