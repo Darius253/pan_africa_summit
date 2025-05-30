@@ -35,10 +35,11 @@ class VolunteerRegistrationPage extends StatelessWidget {
   final SystemAlerts systemAlerts;
 
 
+  static final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final formKey = GlobalKey<FormState>();
+
     final List<String> areasOfInterest = [
       "Print",
       "TV",
@@ -132,7 +133,7 @@ class VolunteerRegistrationPage extends StatelessWidget {
                       "Registration Completed Successfully",
                       isError: false,
                     );
-                   systemAlerts.sendNotification(
+                    systemAlerts.sendNotification(
                       context: context,
                       title: "PAAIS",
                       body:
