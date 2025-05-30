@@ -21,10 +21,9 @@ class TextFields extends StatelessWidget {
       spacing: 10,
       children: [
         RequiredQuestions(question: labelText, theme: theme),
-
         TextFormField(
           controller: controller,
-
+          textCapitalization: TextCapitalization.words,
           maxLines: 1,
           keyboardType: keyboardType ?? TextInputType.text,
           textInputAction: TextInputAction.done,
