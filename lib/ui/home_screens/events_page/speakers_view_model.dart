@@ -22,13 +22,15 @@ class SpeakersViewModel extends ChangeNotifier {
       _setLoading(true);
       final fetched = await speakersRepository.fetchSpeakers();
       _allSpeakers = fetched;
+      _filteredSpeakers = fetched; 
       _errorMessage = null;
     } catch (e) {
       _errorMessage = e.toString();
       _allSpeakers = [];
+      _filteredSpeakers = []; 
     } finally {
       _setLoading(false);
-      notifyListeners();
+      notifyListeners(); 
     }
   }
 
@@ -51,6 +53,5 @@ class SpeakersViewModel extends ChangeNotifier {
 
   void _setLoading(bool value) {
     _isLoading = value;
-    notifyListeners();
   }
 }
