@@ -14,6 +14,10 @@ class SpeakersService {
     if (response.statusCode != 200) throw Exception('Failed to load data');
 
     final data = jsonDecode(response.body);
+    if (data is! List || data.isEmpty) {
+      throw Exception('Unexpected data format');
+    }
+
     final renderedHtml = data.first['content']['rendered'] as String;
     final document = html_parser.parse(renderedHtml);
 
