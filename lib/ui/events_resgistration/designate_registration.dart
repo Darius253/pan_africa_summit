@@ -133,6 +133,7 @@ class _DesignateRegisterationState extends State<DesignateRegisteration> {
                       NavigationButton(
                         icon: Icons.arrow_back,
                         onTap: () {
+                          FocusScope.of(context).unfocus();
                           _dpageController.previousPage(
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.easeIn,
@@ -149,6 +150,7 @@ class _DesignateRegisterationState extends State<DesignateRegisteration> {
                       NavigationButton(
                         icon: Icons.arrow_forward,
                         onTap: () {
+                          FocusScope.of(context).unfocus();
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             _dpageController.nextPage(
@@ -170,6 +172,7 @@ class _DesignateRegisterationState extends State<DesignateRegisteration> {
                     else
                       PrimaryButton(
                         onPressed: () {
+                          FocusScope.of(context).unfocus();
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
