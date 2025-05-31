@@ -100,10 +100,7 @@ class MediaRegistrationPage extends StatelessWidget {
             TextFields(
               labelText: "Mobile Number (Include Country Code)",
               controller: mobileNumberController,
-              keyboardType: const TextInputType.numberWithOptions(
-                signed: true,
-                decimal: false,
-              ),
+              keyboardType:  TextInputType.phone,
             ),
             TextFields(
               labelText: "Media Organisation",
@@ -133,6 +130,7 @@ class MediaRegistrationPage extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: PrimaryButton(
                 onPressed: () {
+                  FocusScope.of(context).unfocus();
                   if (formKey.currentState!.validate()) {
                     // Handle form submission
                     Navigator.pushReplacement(
