@@ -38,10 +38,7 @@ class ContactInformation extends StatelessWidget {
         TextFields(
           labelText: "Mobile Number (Include Country Code)",
           controller: mobileNumberController,
-          keyboardType: const TextInputType.numberWithOptions(
-            signed: true,
-            decimal: false,
-          ),
+          keyboardType: TextInputType.phone,
         ),
 
         TextFields(
@@ -57,10 +54,7 @@ class ContactInformation extends StatelessWidget {
         TextFields(
           labelText: "Emergency Contact Phone Number (Include Country Code)",
           controller: emergencyContactPhoneController,
-          keyboardType: const TextInputType.numberWithOptions(
-            signed: true,
-            decimal: false,
-          ),
+          keyboardType:  TextInputType.phone
         ),
         const SizedBox(height: 60),
       ],
