@@ -34,7 +34,6 @@ class VolunteerRegistrationPage extends StatelessWidget {
   final String? selectedAreasOfInterest;
   final SystemAlerts systemAlerts;
 
-
   static final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -88,10 +87,7 @@ class VolunteerRegistrationPage extends StatelessWidget {
             TextFields(
               labelText: "Mobile Number (Include Country Code)",
               controller: mobileNumberController,
-              keyboardType: const TextInputType.numberWithOptions(
-                signed: true,
-                decimal: false,
-              ),
+              keyboardType: TextInputType.phone,
             ),
 
             CustomDropdown(
@@ -117,6 +113,7 @@ class VolunteerRegistrationPage extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: PrimaryButton(
                 onPressed: () {
+                  FocusScope.of(context).unfocus();
                   if (formKey.currentState!.validate()) {
                     // showLoadingDialog(context);
                     // Handle form submission
